@@ -82,32 +82,32 @@ describe('#generateCationEndGroupCombination', () => {
     const expectedCombinations = [
       {
         cation: { name: 'x', mass: 1000 },
-        endgroups: tupleOne,
+        endGroups: tupleOne,
         totalMass: 1002,
       },
       {
         cation: { name: 'x', mass: 1000 },
-        endgroups: tupleTwo,
+        endGroups: tupleTwo,
         totalMass: 1003,
       },
       {
         cation: { name: 'x', mass: 1000 },
-        endgroups: tupleThree,
+        endGroups: tupleThree,
         totalMass: 1000,
       },
       {
         cation: { name: 'y', mass: 2000 },
-        endgroups: tupleOne,
+        endGroups: tupleOne,
         totalMass: 2002,
       },
       {
         cation: { name: 'y', mass: 2000 },
-        endgroups: tupleTwo,
+        endGroups: tupleTwo,
         totalMass: 2003,
       },
       {
         cation: { name: 'y', mass: 2000 },
-        endgroups: tupleThree,
+        endGroups: tupleThree,
         totalMass: 2000,
       },
     ]

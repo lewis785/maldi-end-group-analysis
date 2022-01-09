@@ -7,17 +7,17 @@ export interface EndGroup {
 
 export interface CationEndGroup {
   cation: Cation
-  endgroups: EndGroupTuple
+  endGroups: EndGroupTuple
   totalMass: number
 }
 
 export type EndGroupTuple = [EndGroup, EndGroup]
 
 export const generateEndGroupCombinations = (
-  endgroups: EndGroup[]
+  endGroups: EndGroup[]
 ): EndGroupTuple[] => {
-  const combinations = endgroups.flatMap<EndGroupTuple>((a, index) =>
-    endgroups.slice(index).map<EndGroupTuple>((b) => [a, b])
+  const combinations = endGroups.flatMap<EndGroupTuple>((a, index) =>
+    endGroups.slice(index).map<EndGroupTuple>((b) => [a, b])
   )
 
   return [
@@ -37,7 +37,7 @@ export const generateCationEndGroupCombinations = (
     endGroups.map((endgroup) => {
       return {
         cation,
-        endgroups: endgroup,
+        endGroups: endgroup,
         totalMass: cation.mass + endgroup[0].mass + endgroup[1].mass,
       }
     })
