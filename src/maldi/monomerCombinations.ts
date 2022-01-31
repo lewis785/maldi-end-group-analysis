@@ -1,6 +1,6 @@
-import { Monomer } from '../types'
+import { Monomer } from './types'
 
-export const monomerCombinations = (
+export const generateMonomerCombinations = (
   target: number,
   monomers: Monomer[]
 ): Monomer[][] => {

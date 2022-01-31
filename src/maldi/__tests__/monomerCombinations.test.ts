@@ -1,7 +1,7 @@
-import { Monomer } from '../../types'
-import { monomerCombinations } from '../monomerCombinations'
+import { Monomer } from '../types'
+import { generateMonomerCombinations } from '../monomerCombinations'
 
-describe('#monomerCombinations', () => {
+describe('#generateMonomerCombinations', () => {
   describe('single monomer', () => {
     const monomer: Monomer = { name: 'A', mass: 25 }
 
@@ -9,7 +9,7 @@ describe('#monomerCombinations', () => {
       const monomer: Monomer = { name: 'A', mass: 25 }
 
       it('should return four results', () => {
-        expect(monomerCombinations(100, [monomer]).length).toBe(4)
+        expect(generateMonomerCombinations(100, [monomer]).length).toBe(4)
       })
 
       it('should match expected result', () => {
@@ -20,7 +20,7 @@ describe('#monomerCombinations', () => {
           [{ ...monomer, count: 4 }],
         ]
 
-        expect(monomerCombinations(100, [monomer])).toStrictEqual(
+        expect(generateMonomerCombinations(100, [monomer])).toStrictEqual(
           expectedResult
         )
       })
@@ -30,7 +30,7 @@ describe('#monomerCombinations', () => {
       const monomer: Monomer = { name: 'A', mass: 30 }
 
       it('should round down and return three results', () => {
-        expect(monomerCombinations(100, [monomer]).length).toBe(3)
+        expect(generateMonomerCombinations(100, [monomer]).length).toBe(3)
       })
 
       it('should match expected result', () => {
@@ -40,7 +40,7 @@ describe('#monomerCombinations', () => {
           [{ ...monomer, count: 3 }],
         ]
 
-        expect(monomerCombinations(100, [monomer])).toStrictEqual(
+        expect(generateMonomerCombinations(100, [monomer])).toStrictEqual(
           expectedResult
         )
       })
