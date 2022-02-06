@@ -49,6 +49,7 @@ export const validateRow = (row: string[]) => {
   }
 
   validatePeak(row)
+  validateMonomer(row)
 }
 
 const validatePeak = (row: string[]) => {
@@ -68,7 +69,32 @@ const validatePeak = (row: string[]) => {
   }
 }
 
-const validateMonomer = () => {}
+const validateMonomer = (row: string[]) => {
+  const monomerName = row[Column.MONOMER_NAME]
+  const monomerMassString = row[Column.MONOMER_MASS]
+
+  if (monomerName === '' && monomerMassString === '') {
+    return
+  }
+
+  if (monomerName !== '' && monomerMassString === '') {
+    throw new ValidationError('Monomer does not have a mass.')
+  }
+
+  if (monomerName === '' && monomerMassString !== '') {
+    throw new ValidationError('Monomer does not have a name.')
+  }
+
+  const monomerMass = Number(monomerMassString)
+
+  if (isNaN(monomerMass)) {
+    throw new ValidationError('Monomer mass must be a number.')
+  }
+
+  if (monomerMass < 0) {
+    throw new ValidationError('Monomer mass cannot be negative.')
+  }
+}
 
 const validateCation = () => {}
 

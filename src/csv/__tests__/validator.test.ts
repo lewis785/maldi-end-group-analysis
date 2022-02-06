@@ -81,4 +81,36 @@ describe('#validateRow', () => {
       )
     })
   })
+
+  describe('monomer validation', () => {
+    it('should not throw validation error when monomer name and mass are valid', () => {
+      expect(() =>
+        validateRow(['', '', '', 'A', '123', '', ''])
+      ).not.toThrowError()
+    })
+
+    it('should throw validation error if monomer name but no mass', () => {
+      expect(() => validateRow(['', '', '', 'A', '', '', ''])).toThrowError(
+        new ValidationError('Monomer does not have a mass.')
+      )
+    })
+
+    it('should throw validation error if monomer has mass but no name', () => {
+      expect(() => validateRow(['', '', '', '', '123', '', ''])).toThrowError(
+        new ValidationError('Monomer does not have a name.')
+      )
+    })
+
+    it('should throw validation error when monomer mass is not a number', () => {
+      expect(() =>
+        validateRow(['', '', '', 'A', 'Square', '', ''])
+      ).toThrowError(new ValidationError('Monomer mass must be a number.'))
+    })
+
+    it('should throw validation error when monomer mass is negative', () => {
+      expect(() => validateRow(['', '', '', 'A', '-125', '', ''])).toThrowError(
+        new ValidationError('Monomer mass cannot be negative.')
+      )
+    })
+  })
 })
