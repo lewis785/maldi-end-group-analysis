@@ -21,7 +21,7 @@ describe('#validateHeader', () => {
       validateHeader(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'])
     ).toThrowError(
       new ValidationError(
-        'Header is not correct. Expected "Peak Name,Peak Mass,Cation Name,Cation Mass,Monomer Name,Monomer Mass,Endgroup Name,Endgroup Mass" Recieved: "a,b,c,d,e,f,g,h"'
+        'Header is not correct. Expected "Peak Name,Peak Mass,Monomer Name,Monomer Mass,Cation Name,Cation Mass,Endgroup Name,Endgroup Mass" Recieved: "a,b,c,d,e,f,g,h"'
       )
     )
   })
@@ -31,10 +31,10 @@ describe('#validateHeader', () => {
       validateHeader([
         'Peak Name',
         'Peak Mass',
-        'Cation Name',
-        'Cation Mass',
         'Monomer Name',
         'Monomer Mass',
+        'Cation Name',
+        'Cation Mass',
         'Endgroup Name',
         'Endgroup Mass',
       ])
@@ -63,55 +63,71 @@ describe('#validateRow', () => {
     )
   })
 
-  describe('peak validation', () => {
-    it('should not throw validation error when row contains a peak value and is number', () => {
-      expect(() =>
-        validateRow(['A', '100', '', '', '', '', '', ''])
-      ).not.toThrowError()
-    })
+  it.each([
+    ['Peak', ['Peak', '123', '', '', '', '', '', '']],
+    ['Monomer', ['', '', 'Monomer', '123', '', '', '', '']],
+    ['Cation', ['', '', '', '', 'Cation', '123', '', '']],
+    ['Endgroup', ['', '', '', '', '', '', 'Endgroup', '123']],
+  ])(
+    'should not throw validation error when name and mass are valid',
+    (type, input: string[]) => {
+      expect(() => validateRow(input)).not.toThrowError()
+    }
+  )
 
-    it('should throw validation error when row contains a peak value and is not a number', () => {
-      expect(() =>
-        validateRow(['A', 'Square', '', '', '', '', '', ''])
-      ).toThrowError(new ValidationError('Peak value must be a number.'))
-    })
-
-    it('should throw validation error when row contains a peak value and is a negative number', () => {
-      expect(() =>
-        validateRow(['A', '-100', '', '', '', '', '', ''])
-      ).toThrowError(new ValidationError('Peak value cannot be negative.'))
-    })
-  })
-
-  describe('monomer validation', () => {
-    it('should not throw validation error when monomer name and mass are valid', () => {
-      expect(() =>
-        validateRow(['', '', '', '', 'A', '123', '', ''])
-      ).not.toThrowError()
-    })
-
-    it('should throw validation error if monomer name but no mass', () => {
-      expect(() => validateRow(['', '', '', '', 'A', '', '', ''])).toThrowError(
-        new ValidationError('Monomer does not have a mass.')
+  it.each([
+    ['Peak', ['Peak', 'Square', '', '', '', '', '', '']],
+    ['Monomer', ['', '', 'Monomer', 'Square', '', '', '', '']],
+    ['Cation', ['', '', '', '', 'Cation', 'Square', '', '']],
+    ['Endgroup', ['', '', '', '', '', '', 'Endgroup', 'Square']],
+  ])(
+    'should throw validation error when %s mass is not a number',
+    (type, input: string[]) => {
+      expect(() => validateRow(input)).toThrowError(
+        new ValidationError(`${type} mass must be a number.`)
       )
-    })
+    }
+  )
 
-    it('should throw validation error if monomer has mass but no name', () => {
-      expect(() =>
-        validateRow(['', '', '', '', '', '123', '', ''])
-      ).toThrowError(new ValidationError('Monomer does not have a name.'))
-    })
+  it.each([
+    ['Peak', ['Peak', '-123', '', '', '', '', '', '']],
+    ['Monomer', ['', '', 'Monomer', '-123', '', '', '', '']],
+    ['Cation', ['', '', '', '', 'Cation', '-123', '', '']],
+    ['Endgroup', ['', '', '', '', '', '', 'Endgroup', '-123']],
+  ])(
+    'should throw validation error when %s mass is a negative number',
+    (type, input: string[]) => {
+      expect(() => validateRow(input)).toThrowError(
+        new ValidationError(`${type} mass cannot be negative.`)
+      )
+    }
+  )
 
-    it('should throw validation error when monomer mass is not a number', () => {
-      expect(() =>
-        validateRow(['', '', '', '', 'A', 'Square', '', ''])
-      ).toThrowError(new ValidationError('Monomer mass must be a number.'))
-    })
+  it.each([
+    ['Peak', ['', '123', '', '', '', '', '', '']],
+    ['Monomer', ['', '', '', '123', '', '', '', '']],
+    ['Cation', ['', '', '', '', '', '123', '', '']],
+    ['Endgroup', ['', '', '', '', '', '', '', '123']],
+  ])(
+    'should throw validation error when %s has mass but no name',
+    (type, input: string[]) => {
+      expect(() => validateRow(input)).toThrowError(
+        new ValidationError(`${type} does not have a name.`)
+      )
+    }
+  )
 
-    it('should throw validation error when monomer mass is negative', () => {
-      expect(() =>
-        validateRow(['', '', '', '', 'A', '-125', '', ''])
-      ).toThrowError(new ValidationError('Monomer mass cannot be negative.'))
-    })
-  })
+  it.each([
+    ['Peak', ['Peak', '', '', '', '', '', '', '']],
+    ['Monomer', ['', '', 'Monomer', '', '', '', '', '']],
+    ['Cation', ['', '', '', '', 'Cation', '', '', '']],
+    ['Endgroup', ['', '', '', '', '', '', 'Endgroup', '']],
+  ])(
+    'should throw validation error when %s has name but no mass',
+    (type, input: string[]) => {
+      expect(() => validateRow(input)).toThrowError(
+        new ValidationError(`${type} does not have a mass.`)
+      )
+    }
+  )
 })

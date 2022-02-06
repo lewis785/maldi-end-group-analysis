@@ -1,12 +1,13 @@
+import { EndGroup } from './../maldi/endgroup'
 import { Column } from './enum'
 
 const expectedHeader = [
   'Peak Name',
   'Peak Mass',
-  'Cation Name',
-  'Cation Mass',
   'Monomer Name',
   'Monomer Mass',
+  'Cation Name',
+  'Cation Mass',
   'Endgroup Name',
   'Endgroup Mass',
 ]
@@ -49,54 +50,53 @@ export const validateRow = (row: string[]) => {
     throw new ValidationError('No data found in row.')
   }
 
-  validatePeak(row)
-  validateMonomer(row)
+  // validatePeak(row)
+  validateColumnNameAndMass(
+    'Peak',
+    row[Column.PEAK_NAME],
+    row[Column.PEAK_MASS]
+  )
+  validateColumnNameAndMass(
+    'Monomer',
+    row[Column.MONOMER_NAME],
+    row[Column.MONOMER_MASS]
+  )
+  validateColumnNameAndMass(
+    'Cation',
+    row[Column.CATION_NAME],
+    row[Column.CATION_MASS]
+  )
+  validateColumnNameAndMass(
+    'Endgroup',
+    row[Column.ENDGROUP_NAME],
+    row[Column.ENDGROUP_MASS]
+  )
 }
 
-const validatePeak = (row: string[]) => {
-  const peakString = row[Column.PEAK_MASS]
-
-  if (peakString === '') {
+const validateColumnNameAndMass = (
+  column: string,
+  name: string,
+  massString: string
+) => {
+  if (name === '' && massString === '') {
     return
   }
-  const peakValue = Number(peakString)
 
-  if (isNaN(peakValue)) {
-    throw new ValidationError('Peak value must be a number.')
+  if (name !== '' && massString === '') {
+    throw new ValidationError(`${column} does not have a mass.`)
   }
 
-  if (peakValue < 0) {
-    throw new ValidationError('Peak value cannot be negative.')
-  }
-}
-
-const validateMonomer = (row: string[]) => {
-  const monomerName = row[Column.MONOMER_NAME]
-  const monomerMassString = row[Column.MONOMER_MASS]
-
-  if (monomerName === '' && monomerMassString === '') {
-    return
+  if (name === '' && massString !== '') {
+    throw new ValidationError(`${column} does not have a name.`)
   }
 
-  if (monomerName !== '' && monomerMassString === '') {
-    throw new ValidationError('Monomer does not have a mass.')
+  const mass = Number(massString)
+
+  if (isNaN(mass)) {
+    throw new ValidationError(`${column} mass must be a number.`)
   }
 
-  if (monomerName === '' && monomerMassString !== '') {
-    throw new ValidationError('Monomer does not have a name.')
-  }
-
-  const monomerMass = Number(monomerMassString)
-
-  if (isNaN(monomerMass)) {
-    throw new ValidationError('Monomer mass must be a number.')
-  }
-
-  if (monomerMass < 0) {
-    throw new ValidationError('Monomer mass cannot be negative.')
+  if (mass < 0) {
+    throw new ValidationError(`${column} mass cannot be negative.`)
   }
 }
-
-const validateCation = () => {}
-
-const validateEndGroup = () => {}
