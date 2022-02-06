@@ -1,3 +1,5 @@
+import { Column } from './enum'
+
 const expectedHeader = [
   'Peak',
   'Cation',
@@ -29,3 +31,45 @@ export const validateHeader = (header: string[]) => {
     )
   }
 }
+
+export const validateRow = (row: string[]) => {
+  if (row.length !== expectedHeader.length) {
+    throw new ValidationError(
+      `Incorrect column count. Expected: ${expectedHeader.length} Recieved: ${row.length}`
+    )
+  }
+
+  const isEmpty = row.reduce<boolean>((empty, column) => {
+    if (!empty) return empty
+    return column === ''
+  }, true)
+
+  if (isEmpty) {
+    throw new ValidationError('No data found in row.')
+  }
+
+  validatePeak(row)
+}
+
+const validatePeak = (row: string[]) => {
+  const peakString = row[Column.PEAK]
+
+  if (peakString === '') {
+    return
+  }
+  const peakValue = Number(peakString)
+
+  if (isNaN(peakValue)) {
+    throw new ValidationError('Peak value must be a number.')
+  }
+
+  if (peakValue < 0) {
+    throw new ValidationError('Peak value cannot be negative.')
+  }
+}
+
+const validateMonomer = () => {}
+
+const validateCation = () => {}
+
+const validateEndGroup = () => {}
