@@ -1,13 +1,14 @@
 import { Column } from './enum'
 
 const expectedHeader = [
-  'Peak',
-  'Cation',
-  'Mass',
-  'Monomer',
-  'Mass',
-  'Endgroup',
-  'Mass',
+  'Peak Name',
+  'Peak Mass',
+  'Cation Name',
+  'Cation Mass',
+  'Monomer Name',
+  'Monomer Mass',
+  'Endgroup Name',
+  'Endgroup Mass',
 ]
 
 export class ValidationError extends Error {}
@@ -53,7 +54,7 @@ export const validateRow = (row: string[]) => {
 }
 
 const validatePeak = (row: string[]) => {
-  const peakString = row[Column.PEAK]
+  const peakString = row[Column.PEAK_MASS]
 
   if (peakString === '') {
     return
