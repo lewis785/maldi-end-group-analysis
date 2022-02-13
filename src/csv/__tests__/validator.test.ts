@@ -4,7 +4,7 @@ import { validateHeader, ValidationError } from '../validator'
 describe('#validateHeader', () => {
   it('should throw validation error when header is too short', () => {
     expect(() => validateHeader([])).toThrowError(
-      new ValidationError('Incorrect column count. Expected: 8 Recieved: 0')
+      new ValidationError('Incorrect column count. Expected: 8 Received: 0')
     )
   })
 
@@ -12,7 +12,7 @@ describe('#validateHeader', () => {
     expect(() =>
       validateHeader(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'])
     ).toThrowError(
-      new ValidationError('Incorrect column count. Expected: 8 Recieved: 9')
+      new ValidationError('Incorrect column count. Expected: 8 Received: 9')
     )
   })
 
@@ -21,7 +21,7 @@ describe('#validateHeader', () => {
       validateHeader(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'])
     ).toThrowError(
       new ValidationError(
-        'Header is not correct. Expected "Peak Name,Peak Mass,Monomer Name,Monomer Mass,Cation Name,Cation Mass,Endgroup Name,Endgroup Mass" Recieved: "a,b,c,d,e,f,g,h"'
+        'Header is not correct. Expected "Peak Name,Peak Mass,Monomer Name,Monomer Mass,Cation Name,Cation Mass,Endgroup Name,Endgroup Mass" Received: "a,b,c,d,e,f,g,h"'
       )
     )
   })
@@ -45,7 +45,7 @@ describe('#validateHeader', () => {
 describe('#validateRow', () => {
   it('should throw validation error is too few columns', () => {
     expect(() => validateRow([])).toThrowError(
-      new ValidationError('Incorrect column count. Expected: 8 Recieved: 0')
+      new ValidationError('Incorrect column count. Expected: 8 Received: 0')
     )
   })
 
@@ -53,7 +53,7 @@ describe('#validateRow', () => {
     expect(() =>
       validateRow(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'])
     ).toThrowError(
-      new ValidationError('Incorrect column count. Expected: 8 Recieved: 9')
+      new ValidationError('Incorrect column count. Expected: 8 Received: 9')
     )
   })
 

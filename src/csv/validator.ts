@@ -17,7 +17,7 @@ export class ValidationError extends Error {}
 export const validateHeader = (header: string[]) => {
   if (header.length !== expectedHeader.length) {
     throw new ValidationError(
-      `Incorrect column count. Expected: ${expectedHeader.length} Recieved: ${header.length}`
+      `Incorrect column count. Expected: ${expectedHeader.length} Received: ${header.length}`
     )
   }
 
@@ -29,7 +29,7 @@ export const validateHeader = (header: string[]) => {
 
   if (!matching) {
     throw new ValidationError(
-      `Header is not correct. Expected "${expectedHeader}" Recieved: "${header}"`
+      `Header is not correct. Expected "${expectedHeader}" Received: "${header}"`
     )
   }
 }
@@ -37,7 +37,7 @@ export const validateHeader = (header: string[]) => {
 export const validateRow = (row: string[]) => {
   if (row.length !== expectedHeader.length) {
     throw new ValidationError(
-      `Incorrect column count. Expected: ${expectedHeader.length} Recieved: ${row.length}`
+      `Incorrect column count. Expected: ${expectedHeader.length} Received: ${row.length}`
     )
   }
 
