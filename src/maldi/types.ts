@@ -1,17 +1,17 @@
 import { EndGroupTuple } from './endgroup'
 
-interface Base {
+export interface NameMass {
   name: string
   mass: number
 }
 
-export interface Monomer extends Base {
+export interface Monomer extends NameMass {
   count?: number
 }
 
-export interface EndGroup extends Base {}
+export interface EndGroup extends NameMass {}
 
-export interface Cation extends Base {}
+export interface Cation extends NameMass {}
 
 export interface EndGroupCombination {
   first: EndGroup
