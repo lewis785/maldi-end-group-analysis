@@ -12,19 +12,22 @@ export const exporter = (input: Input, results: Result[]) => {
 
 const generateHeader = (input: Input, columnCount: number): string[][] => {
   const initialColumns = ['Peak Name', 'Peak Mass', 'Actual Mass', 'Difference']
-  const header = []
+  const initialBuffer = initialColumns.length + 1
 
   return [
-    generateTitleRow(input),
-    generateNameRow(input),
-    generateMassRow(input),
+    generateTitleRow(input, initialBuffer),
+    generateNameRow(input, initialBuffer),
+    generateMassRow(input, initialBuffer),
     [...initialColumns, ...Array(columnCount - initialColumns.length)],
   ]
 }
 
-const generateTitleRow = ({ monomers, cations, endgroups }: Input) => {
+const generateTitleRow = (
+  { monomers, cations, endgroups }: Input,
+  initialBuffer: number
+) => {
   return [
-    ...Array(5),
+    ...Array(initialBuffer),
     'Monomer',
     ...Array(monomers.length),
     'Cations',
@@ -34,9 +37,12 @@ const generateTitleRow = ({ monomers, cations, endgroups }: Input) => {
   ]
 }
 
-const generateNameRow = ({ monomers, cations, endgroups }: Input) => {
+const generateNameRow = (
+  { monomers, cations, endgroups }: Input,
+  initialBuffer: number
+) => {
   return [
-    ...Array(5),
+    ...Array(initialBuffer),
     ...monomers.map((monomer) => monomer.name),
     ,
     ...cations.map((cation) => cation.name),
@@ -45,9 +51,12 @@ const generateNameRow = ({ monomers, cations, endgroups }: Input) => {
   ]
 }
 
-const generateMassRow = ({ monomers, cations, endgroups }: Input) => {
+const generateMassRow = (
+  { monomers, cations, endgroups }: Input,
+  initialBuffer: number
+) => {
   return [
-    ...Array(5),
+    ...Array(initialBuffer),
     ...monomers.map((monomer) => monomer.mass),
     ,
     ...cations.map((cation) => cation.mass),
