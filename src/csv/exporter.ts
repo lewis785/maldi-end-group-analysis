@@ -1,5 +1,5 @@
-import { Monomer } from './../maldi/types'
 import { Input, Result } from '../maldi/types'
+import { generateHeader } from './export/headerRow'
 
 export const exporter = (input: Input, results: Result[]) => {
   const columnCount = getColumnCount(input)
@@ -8,61 +8,6 @@ export const exporter = (input: Input, results: Result[]) => {
   console.log(output.map((row) => row.join(',')).join('\n'))
 
   return output.map((row) => row.join(',')).join('\n')
-}
-
-const generateHeader = (input: Input, columnCount: number): string[][] => {
-  const initialColumns = ['Peak Name', 'Peak Mass', 'Actual Mass', 'Difference']
-  const initialBuffer = initialColumns.length + 1
-
-  return [
-    generateTitleRow(input, initialBuffer),
-    generateNameRow(input, initialBuffer),
-    generateMassRow(input, initialBuffer),
-    [...initialColumns, ...Array(columnCount - initialColumns.length)],
-  ]
-}
-
-const generateTitleRow = (
-  { monomers, cations, endgroups }: Input,
-  initialBuffer: number
-) => {
-  return [
-    ...Array(initialBuffer),
-    'Monomer',
-    ...Array(monomers.length),
-    'Cations',
-    ...Array(cations.length),
-    'Endgroup',
-    ...Array(endgroups.length - 1),
-  ]
-}
-
-const generateNameRow = (
-  { monomers, cations, endgroups }: Input,
-  initialBuffer: number
-) => {
-  return [
-    ...Array(initialBuffer),
-    ...monomers.map((monomer) => monomer.name),
-    ,
-    ...cations.map((cation) => cation.name),
-    ,
-    ...endgroups.map((endgroup) => endgroup.name),
-  ]
-}
-
-const generateMassRow = (
-  { monomers, cations, endgroups }: Input,
-  initialBuffer: number
-) => {
-  return [
-    ...Array(initialBuffer),
-    ...monomers.map((monomer) => monomer.mass),
-    ,
-    ...cations.map((cation) => cation.mass),
-    ,
-    ...endgroups.map((endgroup) => endgroup.mass),
-  ]
 }
 
 const getColumnCount = ({ monomers, cations, endgroups }: Input): number => {
