@@ -1,5 +1,5 @@
-import { Input, Result } from '../maldi/types'
-import { generateHeader } from './export/headerRow'
+import { Input, Result } from 'maldi/types'
+import { generateHeader } from './headerRow'
 
 export const exporter = (input: Input, results: Result[]) => {
   const columnCount = getColumnCount(input)

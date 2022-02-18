@@ -1,5 +1,5 @@
-import { Input } from '../../maldi/types'
-import { exporter } from '../exporter'
+import { Input } from '../../../maldi/types'
+import { exporter } from '..'
 
 describe('#exporter', () => {
   const input: Input = {
