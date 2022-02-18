@@ -24,8 +24,8 @@ describe('#importer', () => {
       ])
     })
 
-    it('should return correct endgroups', () => {
-      expect(result.endgroups).toStrictEqual([
+    it('should return correct endGroups', () => {
+      expect(result.endGroups).toStrictEqual([
         { name: 'OH', mass: 17 },
         { name: 'H', mass: 1 },
         { name: 'Magic', mass: 45 },

@@ -21,7 +21,7 @@ export interface EndGroupCombination {
 export interface Input {
   peaks: NameMass[]
   monomers: NameMass[]
-  endgroups: NameMass[]
+  endGroups: NameMass[]
   cations: NameMass[]
 }
 

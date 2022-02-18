@@ -19,7 +19,7 @@ export const generateHeader = (
 }
 
 const generateTitleRow = (
-  { monomers, cations, endgroups }: Input,
+  { monomers, cations, endGroups }: Input,
   initialBuffer: number
 ) => {
   return [
@@ -29,12 +29,12 @@ const generateTitleRow = (
     'Cation',
     ...generateEmptyArray(cations.length),
     'Endgroup',
-    ...generateEmptyArray(endgroups.length - 1),
+    ...generateEmptyArray(endGroups.length - 1),
   ]
 }
 
 const generateNameRow = (
-  { monomers, cations, endgroups }: Input,
+  { monomers, cations, endGroups }: Input,
   initialBuffer: number
 ) => {
   return [
@@ -43,12 +43,12 @@ const generateNameRow = (
     '',
     ...cations.map(({ name }) => name),
     '',
-    ...endgroups.map(({ name }) => name),
+    ...endGroups.map(({ name }) => name),
   ]
 }
 
 const generateMassRow = (
-  { monomers, cations, endgroups }: Input,
+  { monomers, cations, endGroups }: Input,
   initialBuffer: number
 ) => {
   return [
@@ -57,7 +57,7 @@ const generateMassRow = (
     '',
     ...cations.map(({ mass }) => mass.toString()),
     '',
-    ...endgroups.map(({ mass }) => mass.toString()),
+    ...endGroups.map(({ mass }) => mass.toString()),
   ]
 }
 

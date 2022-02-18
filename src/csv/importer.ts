@@ -21,7 +21,7 @@ export const importer = (path: string) => {
   const parsedInput: Input = {
     peaks: [],
     monomers: [],
-    endgroups: [],
+    endGroups: [],
     cations: [],
   }
 
@@ -31,9 +31,9 @@ export const importer = (path: string) => {
     parsedInput.monomers = monomer
       ? [...parsedInput.monomers, monomer]
       : parsedInput.monomers
-    parsedInput.endgroups = endgroup
-      ? [...parsedInput.endgroups, endgroup]
-      : parsedInput.endgroups
+    parsedInput.endGroups = endgroup
+      ? [...parsedInput.endGroups, endgroup]
+      : parsedInput.endGroups
     parsedInput.cations = cation
       ? [...parsedInput.cations, cation]
       : parsedInput.cations

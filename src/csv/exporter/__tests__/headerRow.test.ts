@@ -12,7 +12,7 @@ describe('#generateHeader', () => {
       { name: 'K', mass: 10 },
       { name: 'Na', mass: 37 },
     ],
-    endgroups: [
+    endGroups: [
       { name: 'Zebra', mass: 43 },
       { name: 'OH', mass: 17 },
       { name: 'H', mass: 1 },
