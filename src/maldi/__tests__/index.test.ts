@@ -1,6 +1,5 @@
-import { Monomer, Result } from './../types'
 import { generateMalidResults } from '..'
-import { Cation, EndGroup } from '../types'
+import { Monomer, NameMass, Result, Cation, EndGroup } from '../types'
 
 describe('#generateMalidResults', () => {
   const cations: Cation[] = [
@@ -13,13 +12,18 @@ describe('#generateMalidResults', () => {
     { name: 'EndGroup C', mass: 15 },
   ]
 
+  const peaks: NameMass[] = [{ name: 'Peak A', mass: 100 }]
+
   describe('singular monomer', () => {
     const monomers: Monomer[] = [{ name: 'Monomer A', mass: 10 }]
     let result: Result[]
 
     describe('threshold is zero', () => {
       beforeEach(() => {
-        result = generateMalidResults(100, 0, monomers, endGroups, cations)
+        result = generateMalidResults(
+          { peaks, monomers, endGroups, cations },
+          0
+        )
       })
 
       it('should return array containing 7 elements', () => {
@@ -37,7 +41,10 @@ describe('#generateMalidResults', () => {
 
     describe('threshold is five', () => {
       beforeEach(() => {
-        result = generateMalidResults(100, 5, monomers, endGroups, cations)
+        result = generateMalidResults(
+          { peaks, monomers, endGroups, cations },
+          5
+        )
       })
 
       it('should return array containing 21 elements', () => {

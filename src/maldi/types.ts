@@ -34,6 +34,7 @@ export interface Combination {
 }
 
 export interface Result {
+  peak: NameMass
   monomers: Monomer[]
   cation: Cation
   endGroups: EndGroupTuple

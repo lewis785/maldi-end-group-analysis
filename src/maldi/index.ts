@@ -3,19 +3,31 @@ import {
   generateCationEndGroupCombinations,
   generateEndGroupCombinations,
 } from './endgroup'
-import { Cation, EndGroup, Monomer } from './types'
+import { Cation, EndGroup, Input, Monomer, NameMass } from './types'
 import { generateMonomerCombinations } from './monomerCombinations'
 import { Result } from './types'
 
 export const generateMalidResults = (
-  peak: number,
-  threshold: number,
+  { peaks, monomers, endGroups, cations }: Input,
+  threshold: number
+): Result[] => {
+  return peaks.reduce<Result[]>((results, peak) => {
+    return [
+      ...results,
+      ...generatePeakResults(peak, monomers, endGroups, cations, threshold),
+    ]
+  }, [])
+}
+
+const generatePeakResults = (
+  peak: NameMass,
   monomers: Monomer[],
   endGroups: EndGroup[],
-  cations: Cation[]
+  cations: Cation[],
+  threshold: number
 ): Result[] => {
-  const minMass = peak - threshold
-  const maxMass = peak + threshold
+  const minMass = peak.mass - threshold
+  const maxMass = peak.mass + threshold
 
   const endGroupCombinations = generateEndGroupCombinations(endGroups)
   const cationEndGroups = generateCationEndGroupCombinations(
@@ -24,7 +36,7 @@ export const generateMalidResults = (
   )
 
   const results: Result[] = cationEndGroups.flatMap((cationEndGroup) =>
-    generateResultsForCationEndGroup(cationEndGroup, monomers, peak, maxMass)
+    generateResultsForCationEndGroup(peak, cationEndGroup, monomers, maxMass)
   )
 
   return results
@@ -33,28 +45,38 @@ export const generateMalidResults = (
 }
 
 const generateResultsForCationEndGroup = (
+  peak: NameMass,
   cationEndGroup: CationEndGroup,
   monomers: Monomer[],
-  targetMass: number,
   maxMass: number
 ): Result[] => {
   const remainingMass = maxMass - cationEndGroup.totalMass
 
   return generateMonomerCombinations(remainingMass, monomers).map(
     (monomerCombination) => {
-      const actualMass =
-        cationEndGroup.totalMass + totalMonomerMass(monomerCombination)
-      return {
-        ...cationEndGroup,
-        monomers: monomerCombination,
-        mass: {
-          target: targetMass,
-          actual: actualMass,
-          difference: Math.abs(targetMass - actualMass),
-        },
-      }
+      return generateResult(peak, cationEndGroup, monomerCombination)
     }
   )
+}
+
+const generateResult = (
+  peak: NameMass,
+  cationEndGroup: CationEndGroup,
+  monomerCombination: Monomer[]
+): Result => {
+  const actualMass =
+    cationEndGroup.totalMass + totalMonomerMass(monomerCombination)
+
+  return {
+    peak,
+    ...cationEndGroup,
+    monomers: monomerCombination,
+    mass: {
+      target: peak.mass,
+      actual: actualMass,
+      difference: Math.abs(peak.mass - actualMass),
+    },
+  }
 }
 
 const totalMonomerMass = (monomers: Monomer[]) => {
