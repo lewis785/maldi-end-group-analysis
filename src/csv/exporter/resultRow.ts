@@ -44,18 +44,9 @@ const mapCation = (cation: Cation, columns: NameMass[]) => {
 }
 
 const mapEndGroups = (endGroups: EndGroupTuple, columns: NameMass[]) => {
-  console.log('Columns', endGroups)
   return columns.map((column) => {
-    const matches = endGroups.filter((endGroup) => {
+    return endGroups.filter((endGroup) => {
       return column.name === endGroup.name && column.mass === endGroup.mass
-    })
-
-    if (matches.length > 1) {
-      throw Error(
-        `Multiple endGroups match column - Name: ${column.name} Mass: ${column.mass}`
-      )
-    }
-
-    return matches.length
+    }).length
   })
 }

@@ -3,7 +3,10 @@ import { generateResultRow } from './../resultRow'
 
 describe('#generateResultRow', () => {
   const input: Input = {
-    peaks: [{ name: 'A', mass: 123 }],
+    peaks: [
+      { name: 'A', mass: 123 },
+      { name: 'Peak B', mass: 543 },
+    ],
     monomers: [
       { name: 'Lesomer', mass: 50 },
       { name: 'samomer', mass: 20 },
@@ -19,7 +22,7 @@ describe('#generateResultRow', () => {
     ],
   }
 
-  const result: Result = {
+  const baseResult: Result = {
     peak: { name: 'A', mass: 123 },
     monomers: [{ name: 'Lesomer', mass: 50, count: 2 }],
     cation: { name: 'K', mass: 10 },
@@ -34,26 +37,64 @@ describe('#generateResultRow', () => {
     },
   }
 
+  const differentResult: Result = {
+    peak: { name: 'Peak B', mass: 543 },
+    monomers: [{ name: 'samomer', mass: 20, count: 13 }],
+    cation: { name: 'Na', mass: 37 },
+    endGroups: [
+      { name: 'OH', mass: 17 },
+      { name: 'Zebra', mass: 43 },
+    ],
+    mass: {
+      target: 543,
+      actual: 357,
+      difference: 186,
+    },
+  }
+
+  const dataProvider: [string, Result, (string | number)[]][] = [
+    [
+      'first result',
+      baseResult,
+      ['A', 123, 154, 31, '', 2, 0, '', 1, 0, '', 1, 0, 1],
+    ],
+    [
+      'second result',
+      differentResult,
+      ['Peak B', 543, 357, 186, '', 0, 13, '', 0, 1, '', 1, 1, 0],
+    ],
+    [
+      'contains no endgroups',
+      {
+        ...baseResult,
+        endGroups: [
+          { name: 'empty', mass: 0 },
+          { name: 'empty', mass: 0 },
+        ],
+      },
+      ['A', 123, 154, 31, '', 2, 0, '', 1, 0, '', 0, 0, 0],
+    ],
+    [
+      'two endGroups are the same',
+      {
+        ...baseResult,
+        endGroups: [
+          { name: 'Zebra', mass: 43 },
+          { name: 'Zebra', mass: 43 },
+        ],
+      },
+      ['A', 123, 154, 31, '', 2, 0, '', 1, 0, '', 2, 0, 0],
+    ],
+  ]
+
   it('should create result row of length fourteen', () => {
-    expect(generateResultRow(result, input).length).toBe(14)
+    expect(generateResultRow(baseResult, input).length).toBe(14)
   })
 
-  it('should match expected result', () => {
-    expect(generateResultRow(result, input)).toStrictEqual([
-      'A',
-      123,
-      154,
-      31,
-      '',
-      2,
-      0,
-      '',
-      1,
-      0,
-      '',
-      1,
-      0,
-      1,
-    ])
-  })
+  it.each(dataProvider)(
+    'should match expected result when %s',
+    (_, result, expected) => {
+      expect(generateResultRow(result, input)).toStrictEqual(expected)
+    }
+  )
 })
