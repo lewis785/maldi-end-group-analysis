@@ -1,7 +1,14 @@
 import { Input, Result } from 'maldi/types'
 import { exporter } from '..'
+import fs from 'fs'
+
+jest.mock('fs')
 
 describe('#exporter', () => {
+  beforeEach(() => {
+    jest.resetAllMocks()
+  })
+
   const input: Input = {
     peaks: [
       { name: 'A', mass: 123 },
@@ -57,10 +64,11 @@ describe('#exporter', () => {
     const expected = `,,,,,Monomer,,,Cation,,,Endgroup,,
 ,,,,,Lesomer,samomer,,K,Na,,Zebra,OH,H
 ,,,,,50,20,,10,37,,43,17,1
-Peak Name,Peak Mass,Actual Mass,Difference,,,,,,,,,,,
+Peak Name,Peak Mass,Actual Mass,Difference,,,,,,,,,,
 A,123,154,31,,2,0,,1,0,,1,0,1
 Peak B,543,357,186,,0,13,,0,1,,1,1,0`
 
-    expect(exporter(input, results)).toBe(expected)
+    exporter('test.csv', input, results)
+    expect(fs.writeFileSync).toBeCalledWith('test.csv', expected)
   })
 })
