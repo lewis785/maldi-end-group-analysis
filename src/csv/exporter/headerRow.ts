@@ -1,10 +1,8 @@
 import { Input } from 'maldi/types'
 
-export const generateHeader = (
-  input: Input,
-  columnCount: number
-): string[][] => {
-  const initialColumns = ['Peak Name', 'Peak Mass', 'Actual Mass', 'Difference']
+const initialColumns = ['Peak Name', 'Peak Mass', 'Actual Mass', 'Difference']
+
+export const generateHeader = (input: Input): string[][] => {
   const initialBuffer = initialColumns.length + 1
 
   return [
@@ -13,7 +11,7 @@ export const generateHeader = (
     generateMassRow(input, initialBuffer),
     [
       ...initialColumns,
-      ...generateEmptyArray(columnCount - initialColumns.length),
+      ...generateEmptyArray(getColumnCount(input) - initialColumns.length),
     ],
   ]
 }
@@ -63,4 +61,13 @@ const generateMassRow = (
 
 const generateEmptyArray = (length: number) => {
   return Array(length).fill('')
+}
+
+const getColumnCount = ({ monomers, cations, endGroups }: Input): number => {
+  let columnCount = initialColumns.length + 1
+  columnCount += monomers.length > 0 ? monomers.length + 1 : 2
+  columnCount += cations.length > 0 ? cations.length + 1 : 2
+  columnCount += endGroups.length > 0 ? endGroups.length : 1
+
+  return columnCount
 }

@@ -21,7 +21,7 @@ describe('#generateHeader', () => {
 
   let result: string[][]
   beforeEach(() => {
-    result = generateHeader(input, 14)
+    result = generateHeader(input)
   })
 
   it('should generate rows element count matches column count', () => {
