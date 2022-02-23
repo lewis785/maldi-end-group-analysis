@@ -66,6 +66,7 @@ describe('#exporter', () => {
 ,,,,,50,20,,10,37,,43,17,1
 Peak Name,Peak Mass,Actual Mass,Difference,,,,,,,,,,
 A,123,154,31,,2,0,,1,0,,1,0,1
+,,,,,,,,,,,,,
 Peak B,543,357,186,,0,13,,0,1,,1,1,0`
 
     exporter('test.csv', input, results)
