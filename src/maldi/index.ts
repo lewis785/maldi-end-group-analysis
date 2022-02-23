@@ -7,7 +7,7 @@ import { Cation, EndGroup, Input, Monomer, NameMass } from './types'
 import { generateMonomerCombinations } from './monomerCombinations'
 import { Result } from './types'
 
-export const generateMalidResults = (
+export const generateMaldiResults = (
   { peaks, monomers, endGroups, cations }: Input,
   threshold: number
 ): Result[] => {

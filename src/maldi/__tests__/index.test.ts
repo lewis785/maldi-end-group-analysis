@@ -1,7 +1,7 @@
-import { generateMalidResults } from '..'
+import { generateMaldiResults } from '..'
 import { Monomer, NameMass, Result, Cation, EndGroup } from '../types'
 
-describe('#generateMalidResults', () => {
+describe('#generatdiResults', () => {
   const cations: Cation[] = [
     { name: 'Cation A', mass: 5 },
     { name: 'Cation B', mass: 10 },
@@ -20,7 +20,7 @@ describe('#generateMalidResults', () => {
 
     describe('threshold is zero', () => {
       beforeEach(() => {
-        result = generateMalidResults(
+        result = generateMaldiResults(
           { peaks, monomers, endGroups, cations },
           0
         )
@@ -41,7 +41,7 @@ describe('#generateMalidResults', () => {
 
     describe('threshold is five', () => {
       beforeEach(() => {
-        result = generateMalidResults(
+        result = generateMaldiResults(
           { peaks, monomers, endGroups, cations },
           5
         )
