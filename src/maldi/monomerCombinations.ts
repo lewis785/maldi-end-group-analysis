@@ -15,6 +15,10 @@ export const generateMonomerCombinations = (
 const singleMonomer = (target: number, monomer: Monomer): Monomer[][] => {
   const maxRepeatUnits = Math.floor(target / monomer.mass)
 
+  if (maxRepeatUnits < 0) {
+    return []
+  }
+
   return [...Array(maxRepeatUnits)].map((_, index) => {
     return [{ ...monomer, count: index + 1 }]
   })

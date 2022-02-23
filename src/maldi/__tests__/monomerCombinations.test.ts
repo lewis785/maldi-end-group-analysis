@@ -5,6 +5,10 @@ describe('#generateMonomerCombinations', () => {
   describe('single monomer', () => {
     const monomer: Monomer = { name: 'A', mass: 25 }
 
+    it('should return empty array if repeat unit is negative', () => {
+      expect(generateMonomerCombinations(-100, [monomer])).toStrictEqual([])
+    })
+
     describe('monomer divides into target with no remainder', () => {
       const monomer: Monomer = { name: 'A', mass: 25 }
 
