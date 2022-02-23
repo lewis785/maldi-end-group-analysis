@@ -1,6 +1,6 @@
 Peak Name,Peak Mass,Monomer Name,Monomer Mass,Cation Name,Cation Mass,Endgroup Name,Endgroup Mass
 A,123,Lactide,72,K,39,OH,17
-B,321,,,Na,23,H,1
+B,321,Propide,152,Na,23,H,1
 ,,,,,,Magic,45
 ,,,,,,Something,12
 ,,,,,,Else,89

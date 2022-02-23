@@ -3,7 +3,7 @@ import { importer } from '../importer'
 
 describe('#importer', () => {
   describe('valid input', () => {
-    const path = `${__dirname}/data/single_monomer.csv`
+    const path = `${__dirname}/data/multi_monomer.csv`
     let result: Input
 
     beforeEach(() => {
