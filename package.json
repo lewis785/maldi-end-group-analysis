@@ -4,7 +4,7 @@
   "description": "",
   "main": "jest.config.js",
   "bin": {
-    "malid": "./build/cli/index.js"
+    "maldi": "./build/cli/index.js"
   },
   "scripts": {
     "build": "tsc",
