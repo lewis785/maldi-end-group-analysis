@@ -1,3 +1,5 @@
+[![Tests](https://github.com/lewis785/maldi-end-group-analysis/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/lewis785/maldi-end-group-analysis/actions/workflows/test.yml)
+
 # maldi-end-group-analysis
 
 ## Prerequisites
