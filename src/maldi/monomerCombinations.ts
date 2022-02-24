@@ -8,7 +8,7 @@ export const generateMonomerCombinations = (
     case 1:
       return singleMonomer(target, monomers[0])
     default:
-      throw Error(`${monomers.length} `)
+      throw Error(`More than one monomer is not support`)
   }
 }
 

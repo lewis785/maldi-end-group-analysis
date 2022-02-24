@@ -2,6 +2,19 @@ import { Monomer } from '../types'
 import { generateMonomerCombinations } from '../monomerCombinations'
 
 describe('#generateMonomerCombinations', () => {
+  const monomers: Monomer[] = [
+    { name: 'A', mass: 25 },
+    { name: 'B', mass: 50 },
+  ]
+
+  describe('multiple monomers', () => {
+    it('should throw error', () => {
+      expect(() => generateMonomerCombinations(100, monomers)).toThrowError(
+        new Error('More than one monomer is not support')
+      )
+    })
+  })
+
   describe('single monomer', () => {
     const monomer: Monomer = { name: 'A', mass: 25 }
 
