@@ -35,6 +35,6 @@ const argv = yargs
 
 const maldiInput = importer(argv.file)
 const results = generateMaldiResults(maldiInput, argv.threshold)
-exporter(`${argv.output}.csv`, maldiInput, results)
+exporter(argv.output, maldiInput, results)
 
 console.log(`Output - Total Results: ${results.length}`)

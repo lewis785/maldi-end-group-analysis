@@ -60,8 +60,7 @@ describe('#exporter', () => {
     },
   ]
 
-  it('should generate header correctly', () => {
-    const expected = `,,,,,Monomer,,,Cation,,,Endgroup,,
+  const expectedContent = `,,,,,Monomer,,,Cation,,,Endgroup,,
 ,,,,,Lesomer,samomer,,K,Na,,Zebra,OH,H
 ,,,,,50,20,,10,37,,43,17,1
 Peak Name,Peak Mass,Actual Mass,Difference,,,,,,,,,,
@@ -69,7 +68,16 @@ A,123,154,31,,2,0,,1,0,,1,0,1
 ,,,,,,,,,,,,,
 Peak B,543,357,186,,0,13,,0,1,,1,1,0`
 
-    exporter('test.csv', input, results)
-    expect(fs.writeFileSync).toBeCalledWith('test.csv', expected)
+  it('should write file with correct name and content', () => {
+    exporter('test', input, results)
+    expect(fs.writeFileSync).toBeCalledWith('test.csv', expectedContent)
+  })
+
+  it('should add copy number to filename if file already exists', () => {
+    const mockedExistsSync = fs.existsSync as jest.Mock
+    mockedExistsSync.mockReturnValueOnce(true).mockReturnValueOnce(false)
+
+    exporter('test', input, results)
+    expect(fs.writeFileSync).toBeCalledWith('test(1).csv', expectedContent)
   })
 })
