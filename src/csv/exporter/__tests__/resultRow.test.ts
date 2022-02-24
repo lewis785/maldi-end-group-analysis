@@ -97,4 +97,18 @@ describe('#generateResultRow', () => {
       expect(generateResultRow(result, input)).toStrictEqual(expected)
     }
   )
+
+  it('should throw error if more than one monomer matches column', () => {
+    const duplicateMonomerResult = {
+      ...baseResult,
+      monomers: [
+        { name: 'Lesomer', mass: 50 },
+        { name: 'Lesomer', mass: 50 },
+      ],
+    } as Result
+
+    expect(() => generateResultRow(duplicateMonomerResult, input)).toThrowError(
+      new Error('Multiple monomers match column - Name: Lesomer Mass: 50')
+    )
+  })
 })

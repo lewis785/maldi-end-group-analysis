@@ -75,9 +75,12 @@ Peak B,543,357,186,,0,13,,0,1,,1,1,0`
 
   it('should add copy number to filename if file already exists', () => {
     const mockedExistsSync = fs.existsSync as jest.Mock
-    mockedExistsSync.mockReturnValueOnce(true).mockReturnValueOnce(false)
+    mockedExistsSync
+      .mockReturnValueOnce(true)
+      .mockReturnValueOnce(true)
+      .mockReturnValueOnce(false)
 
     exporter('test', input, results)
-    expect(fs.writeFileSync).toBeCalledWith('test(1).csv', expectedContent)
+    expect(fs.writeFileSync).toBeCalledWith('test(2).csv', expectedContent)
   })
 })
