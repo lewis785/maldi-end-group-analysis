@@ -1,4 +1,4 @@
-import { Input, Result } from 'maldi/types'
+import { Input, Result } from '../../maldi/types'
 import { generateHeader } from './headerRow'
 import { generateResultRow } from './resultRow'
 import { writeFileSync, existsSync } from 'fs'

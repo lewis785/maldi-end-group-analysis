@@ -1,4 +1,4 @@
-import { Input, Result } from 'maldi/types'
+import { Input, Result } from '../../../maldi/types'
 import { exporter } from '..'
 import fs from 'fs'
 

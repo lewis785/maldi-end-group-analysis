@@ -1,4 +1,4 @@
-import { Input, Result } from 'maldi/types'
+import { Input, Result } from '../../../maldi/types'
 import { generateResultRow } from './../resultRow'
 
 describe('#generateResultRow', () => {

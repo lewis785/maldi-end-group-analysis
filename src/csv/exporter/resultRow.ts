@@ -1,6 +1,6 @@
 import { Cation } from './../../maldi/types'
-import { Input, Result, Monomer, NameMass } from 'maldi/types'
-import { EndGroupTuple } from 'maldi/endgroup'
+import { Input, Result, Monomer, NameMass } from '../../maldi/types'
+import { EndGroupTuple } from '../../maldi/endgroup'
 import { ResultRow } from './type'
 
 export const generateResultRow = (result: Result, input: Input): ResultRow => {

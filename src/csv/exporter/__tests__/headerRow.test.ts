@@ -1,4 +1,4 @@
-import { Input } from 'maldi/types'
+import { Input } from '../../../maldi/types'
 import { generateHeader } from '../headerRow'
 
 describe('#generateHeader', () => {

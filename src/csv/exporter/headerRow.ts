@@ -1,4 +1,4 @@
-import { Input } from 'maldi/types'
+import { Input } from '../../maldi/types'
 
 const initialColumns = ['Peak Name', 'Peak Mass', 'Actual Mass', 'Difference']
 
