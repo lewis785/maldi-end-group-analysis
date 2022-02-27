@@ -83,4 +83,16 @@ Peak B,543,357,186,,0,13,,0,1,,1,1,0`
     exporter('test', input, results)
     expect(fs.writeFileSync).toBeCalledWith('test(2).csv', expectedContent)
   })
+
+  describe('empty result', () => {
+    const expectedContent = `,,,,,Monomer,,,Cation,,,Endgroup,,
+,,,,,Lesomer,samomer,,K,Na,,Zebra,OH,H
+,,,,,50,20,,10,37,,43,17,1
+Peak Name,Peak Mass,Actual Mass,Difference,,,,,,,,,,`
+
+    it('should write file with correct name and content', () => {
+      exporter('test', input, [])
+      expect(fs.writeFileSync).toBeCalledWith('test.csv', expectedContent)
+    })
+  })
 })

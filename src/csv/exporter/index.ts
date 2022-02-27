@@ -30,6 +30,10 @@ const writeToFile = (filename: string, content: string) => {
 }
 
 const addEmptyLineBetweenPeakRows = (resultRows: ResultRow[]) => {
+  if (resultRows.length === 0) {
+    return resultRows
+  }
+
   const emptyRow = [...Array(resultRows[0].length)].map((ele) => '')
   let previous = { name: resultRows[0][0], value: resultRows[0][1] }
 
