@@ -20,18 +20,39 @@ curl https://get.volta.sh | bash
 
 ### Setup
 
-Run the following command to setup the cli
+Install Globally
 
 ```shell script
-yarn install
-yarn build
-yarn setup-cli
+npm install maldi-end-group-analysis -g
 ```
 
 ### Usage
 
+Show all commands:
+
 ```shell script
 maldi --help
+
+Usage: maldi <command> [options]
+
+Commands:
+  maldi analyse [file] [options]  Run maldi end group analysis
+  maldi example-file [format]     Generate example import file
+
+Options:
+  --version  Show version number                             [boolean]
+
+Examples:
+  maldi example-file csv                          Generate an example csv file
+  maldi analyse input.csv -t 10 -o test-result    Run analysis on file
+
+```
+
+Show options for `analyse` command:
+
+```shell script
+maldi analyse --help
+
 Usage: maldi [options]
 
 Options:
@@ -39,17 +60,27 @@ Options:
   -f, --file       Path to file being analysed              [string] [required]
   -t, --threshold  Maximum allowed difference from peak     [number] [required] [default: 0]
   -o, --output     Output file name                         [string] [default: "results"]
-  -h               Show help                                [boolean]
+  --format     Format of file that should be outputted      [string] [choices: "csv"] [default: "csv"]
 ```
 
 To analyse a file called `input.csv` with a threshold of `0`, then output the results to a file called `results.csv`:
 
 ```shell script
-maldi -f input.csv
+maldi analyse input.csv
 ```
 
 To analyse a file called `input.csv` with a threshold of `100`, then output the results to a file called `result_file.csv`:
 
 ```shell script
-maldi -f input.csv -o result_file -t 100
+maldi analyse input.csv -o result_file -t 100
+```
+
+## Development
+
+### Setup CLI
+
+```shell script
+yarn install
+yarn build
+yarn setup-cli
 ```
