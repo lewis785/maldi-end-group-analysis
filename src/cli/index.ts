@@ -10,5 +10,6 @@ const argv = yargs
   .commandDir('commands')
   .demandCommand()
   .help('h')
+  .example('$0 example-file', 'Generate an example csv file')
   .example('$0 analyse input.csv -t 10 -o test-result', 'Run analysis on file')
   .alias('help', 'help').argv
