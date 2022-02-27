@@ -23,6 +23,8 @@ curl https://get.volta.sh | bash
 Run the following command to setup the cli
 
 ```shell script
+yarn install
+yarn build
 yarn setup-cli
 ```
 
