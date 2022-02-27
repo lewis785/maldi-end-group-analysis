@@ -1,4 +1,5 @@
-import { choices, Options } from 'yargs'
+import { readFileSync } from 'fs'
+import { Options } from 'yargs'
 import { exporter } from '../../csv/exporter'
 import { importer } from '../../csv/importer'
 import { generateMaldiResults } from '../../maldi'
@@ -36,9 +37,9 @@ export const builder: { [key: string]: Options } = {
     default: 'maldi_end_group_analysis_result',
     type: 'string',
   },
-  type: {
+  format: {
     nargs: 1,
-    describe: 'Type of file that should be outputted',
+    describe: 'Format of file that should be outputted',
     choices: ['csv'],
     default: 'csv',
     type: 'string',
@@ -46,9 +47,40 @@ export const builder: { [key: string]: Options } = {
 }
 
 export const handler = (argv: Arguments) => {
-  const maldiInput = importer(argv.file)
-  const results = generateMaldiResults(maldiInput, argv.threshold)
-  exporter(argv.output, maldiInput, results)
+  try {
+    const maldiInput = parseMaldiInput(argv.file)
+    const results = generateMaldiResults(maldiInput, argv.threshold)
+    exporter(argv.output, maldiInput, results)
 
-  console.log(`Output - Total Results: ${results.length}`)
+    console.log(`Output - Total Results: ${results.length}`)
+  } catch (e) {
+    console.log(`Error occurred: ${(e as Error).message}`)
+  }
+}
+
+const parseMaldiInput = (filePath: string) => {
+  const fileExtension = filePath.split('.').pop()
+
+  switch (fileExtension) {
+    case 'csv':
+      return importer(filePath)
+    case 'json':
+      return parseInputJson(filePath)
+    default:
+      throw Error(`Unsupported file type .${fileExtension}`)
+  }
+}
+
+const parseInputJson = (filePath: string) => {
+  const input = JSON.parse(readFileSync(filePath, 'utf8'))
+
+  const fields = ['peaks', 'monomers', 'cations', 'endGroups']
+
+  fields.forEach((field) => {
+    if (!(field in input)) {
+      throw Error(`Input json does not contain property: ${field}`)
+    }
+  })
+
+  return input
 }
