@@ -1,8 +1,7 @@
 {
   "name": "maldi-end-group-analysis",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
-  "main": "jest.config.js",
   "bin": {
     "maldi": "./build/cli/index.js"
   },
@@ -15,6 +14,10 @@
     "test-watch": "jest --watch",
     "test": "jest"
   },
+  "files": [
+    "build",
+    "README.md"
+  ],
   "pkg": {
     "scripts": "build/**/*.js"
   },
