@@ -14,7 +14,8 @@
     "package": "pkg . --output maldi",
     "setup-cli": "npm link",
     "test-watch": "jest --watch",
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "yarn test && yarn build"
   },
   "files": [
     "build/**/*",
