@@ -1,7 +1,9 @@
 {
   "name": "maldi-end-group-analysis",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "bin": {
     "maldi": "./build/cli/index.js"
   },
@@ -15,7 +17,7 @@
     "test": "jest"
   },
   "files": [
-    "build",
+    "build/**/*",
     "README.md"
   ],
   "pkg": {
