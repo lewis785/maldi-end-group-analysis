@@ -5,7 +5,9 @@ import { v4 } from 'uuid'
 import styled from 'styled-components'
 
 interface Props {
+  onChange: (rows: Record<string, NameMass>) => void
   rowCount: Number
+  rows: Record<string, NameMass>
 }
 
 const InputGroup = styled.span`
@@ -13,28 +15,26 @@ const InputGroup = styled.span`
   flex-direction: column;
 `
 
-export const NameMassForm = ({ rowCount }: Props) => {
-  const [rows, setRows] = useState<Record<string, NameMass>>({})
-  // const [rowOrder, setRowOrder] = useState([])
-
+export const NameMassForm = ({ onChange, rowCount, rows }: Props) => {
   useEffect(() => {
     const initRows: Record<string, NameMass> = {}
     Array.from(Array(rowCount)).forEach(() => {
       initRows[v4()] = { name: '', mass: 0 }
     })
-    setRows(initRows)
+
+    onChange(initRows)
   }, [])
 
   const addRow = (e: React.MouseEvent) => {
     e.preventDefault()
-    setRows({ ...rows, [v4()]: { name: '', mass: 0 } })
+    onChange({ ...rows, [v4()]: { name: '', mass: 0 } })
   }
 
   const removeRow = (e: React.MouseEvent, id: string) => {
     e.preventDefault()
     const state = { ...rows }
     delete state[id]
-    setRows(state)
+    onChange(state)
   }
 
   const createRows = () => {
@@ -45,7 +45,7 @@ export const NameMassForm = ({ rowCount }: Props) => {
           <NameMassInput
             key={id}
             values={rows[id]}
-            onChange={(values: NameMass) => setRows({ ...rows, [id]: values })}
+            onChange={(values: NameMass) => onChange({ ...rows, [id]: values })}
             onRemoveClick={(e) => removeRow(e, id)}
           />
         </InputGroup>
@@ -54,9 +54,9 @@ export const NameMassForm = ({ rowCount }: Props) => {
   }
 
   return (
-    <form>
-      <fieldset>{createRows()}</fieldset>
+    <fieldset>
+      {createRows()}
       <button onClick={addRow}>Add Row</button>
-    </form>
+    </fieldset>
   )
 }
