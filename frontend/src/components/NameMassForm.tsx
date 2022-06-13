@@ -38,12 +38,10 @@ export const NameMassForm = ({ onChange, rowCount, rows }: Props) => {
   }
 
   const createRows = () => {
-    console.log(rows)
     return Object.keys(rows).map((id) => {
       return (
-        <InputGroup>
+        <InputGroup key={id}>
           <NameMassInput
-            key={id}
             values={rows[id]}
             onChange={(values: NameMass) => onChange({ ...rows, [id]: values })}
             onRemoveClick={(e) => removeRow(e, id)}
