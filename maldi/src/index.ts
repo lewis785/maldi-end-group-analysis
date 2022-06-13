@@ -1,7 +1,6 @@
-import { generateMaldiResults } from './maldi'
 import { exporter } from './csv/exporter'
 import { importer } from './csv/importer'
 
-const csv = { importer, exporter }
-
-export { csv, generateMaldiResults }
+export { generateMaldiResults } from './maldi'
+export const csv = { exporter, importer }
+export type { Input, NameMass, Result } from './maldi/types'
