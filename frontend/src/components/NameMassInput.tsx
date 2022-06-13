@@ -14,7 +14,6 @@ export const NameMassInput = ({ values, onChange, onRemoveClick }: Props) => {
 
   const onMassChange = (e: InputEvent) => {
     const value = parseFloat(e.target.value)
-    console.log({ mass, value, event: e.target.value })
     if (isNaN(value)) {
       return onChange({ name, mass })
     }
