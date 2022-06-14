@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { Input } from '../types'
+import { Input } from 'maldi-end-group-analysis'
 import { ConfigFields } from './ConfigFields'
 import { NameMassForm } from './NameMassForm'
 
@@ -16,50 +16,50 @@ export const InputForm = ({ onValueChange }: Props) => {
   const [monomers, setMonomers] = useState({})
   const [catIons, setCatIons] = useState({})
   const [endGroups, setEndGroups] = useState({})
-  const [totalMass, setTotalMass] = useState(0)
+  const [peaks, setPeaks] = useState({})
   const [difference, setDifference] = useState(0)
 
   useEffect(() => {
     onValueChange({
-      totalMass,
-      difference,
+      peaks: Object.values(peaks),
       monomers: Object.values(monomers),
       cations: Object.values(catIons),
       endGroups: Object.values(endGroups),
     })
-  }, [monomers, catIons, endGroups, totalMass, difference])
+  }, [monomers, catIons, endGroups, peaks, difference])
 
   const onConfigChange = (config: {
     totalMass: number
     difference: number
   }) => {
-    setTotalMass(config.totalMass)
+    setPeaks(config.totalMass)
     setDifference(config.difference)
   }
 
   return (
     <Form>
-      <ConfigFields
-        totalMass={totalMass}
-        difference={difference}
-        onChange={onConfigChange}
+      <NameMassForm
+        key="peaks"
+        rows={peaks}
+        onChange={(rows) => setPeaks(rows)}
+        rowCount={1}
       />
       <NameMassForm
         key="monomers"
         rows={monomers}
-        onChange={(rows) => setMonomers({ ...monomers, ...rows })}
+        onChange={(rows) => setMonomers(rows)}
         rowCount={1}
       />
       <NameMassForm
         key="catIons"
         rows={catIons}
-        onChange={(rows) => setCatIons({ ...catIons, ...rows })}
-        rowCount={3}
+        onChange={(rows) => setCatIons(rows)}
+        rowCount={2}
       />
       <NameMassForm
         key="endGroups"
         rows={endGroups}
-        onChange={(rows) => setEndGroups({ ...endGroups, ...rows })}
+        onChange={(rows) => setEndGroups(rows)}
         rowCount={3}
       />
     </Form>
