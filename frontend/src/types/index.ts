@@ -1,6 +1,6 @@
 export interface NameMass {
   name: string
-  mass: number
+  mass: number | null
 }
 
 export interface Input {

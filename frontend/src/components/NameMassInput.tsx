@@ -1,5 +1,6 @@
 import React from 'react'
 import { NameMass } from '../types'
+import { DecimalInput } from './DecimalInput'
 
 interface Props {
   values: NameMass
@@ -12,11 +13,7 @@ export const NameMassInput = ({ values, onChange, onRemoveClick }: Props) => {
 
   type InputEvent = React.ChangeEvent<HTMLInputElement>
 
-  const onMassChange = (e: InputEvent) => {
-    const value = parseFloat(e.target.value)
-    if (isNaN(value)) {
-      return onChange({ name, mass })
-    }
+  const onMassChange = (value: number | null) => {
     onChange({ name, mass: value })
   }
 
@@ -27,7 +24,7 @@ export const NameMassInput = ({ values, onChange, onRemoveClick }: Props) => {
         value={name}
         onChange={(e: InputEvent) => onChange({ name: e.target.value, mass })}
       />
-      <input type="number" step="0.01" value={mass} onChange={onMassChange} />
+      <DecimalInput value={mass} onChange={onMassChange} />
       <button onClick={onRemoveClick}>Remove Row</button>
     </span>
   )
