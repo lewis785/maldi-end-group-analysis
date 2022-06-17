@@ -18,7 +18,7 @@ export const NameMassFieldSet = ({ onChange, rowCount, rows }: Props) => {
   useEffect(() => {
     const initRows: Record<string, NameMass> = {}
     Array.from(Array(rowCount)).forEach(() => {
-      initRows[v4()] = { name: '', mass: 0 }
+      initRows[v4()] = { name: '', mass: null }
     })
 
     onChange(initRows)

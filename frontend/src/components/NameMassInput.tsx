@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NameMass } from '../types'
 import { DecimalInput } from './DecimalInput'
 
@@ -8,22 +8,27 @@ interface Props {
 }
 
 export const NameMassInput = ({ values, onChange }: Props) => {
+  const decimalPlaces = 3
   const { name, mass } = values
 
   type InputEvent = React.ChangeEvent<HTMLInputElement>
 
-  const onMassChange = (value: number | null) => {
-    onChange({ name, mass: value })
+  const onNameChange = ({ target }: InputEvent) => {
+    onChange({ name: target.value, mass: Number(mass) })
+  }
+
+  const onMassChange = (value: string) => {
+    onChange({ name, mass: Number(Number(value).toFixed(decimalPlaces)) })
   }
 
   return (
     <>
-      <input
-        type="text"
-        value={name}
-        onChange={(e: InputEvent) => onChange({ name: e.target.value, mass })}
+      <input type="text" value={name} onChange={onNameChange} />
+      <DecimalInput
+        initialValue={mass}
+        onChange={onMassChange}
+        decimalPlaces={decimalPlaces}
       />
-      <DecimalInput value={mass} onChange={onMassChange} />
     </>
   )
 }
