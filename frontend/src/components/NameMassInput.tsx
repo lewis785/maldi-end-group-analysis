@@ -5,10 +5,9 @@ import { DecimalInput } from './DecimalInput'
 interface Props {
   values: NameMass
   onChange: (values: NameMass) => void
-  onRemoveClick?: (e: React.MouseEvent) => void
 }
 
-export const NameMassInput = ({ values, onChange, onRemoveClick }: Props) => {
+export const NameMassInput = ({ values, onChange }: Props) => {
   const { name, mass } = values
 
   type InputEvent = React.ChangeEvent<HTMLInputElement>
@@ -18,14 +17,13 @@ export const NameMassInput = ({ values, onChange, onRemoveClick }: Props) => {
   }
 
   return (
-    <span>
+    <>
       <input
         type="text"
         value={name}
         onChange={(e: InputEvent) => onChange({ name: e.target.value, mass })}
       />
       <DecimalInput value={mass} onChange={onMassChange} />
-      <button onClick={onRemoveClick}>Remove Row</button>
-    </span>
+    </>
   )
 }

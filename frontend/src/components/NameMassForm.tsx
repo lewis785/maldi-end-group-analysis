@@ -12,7 +12,6 @@ interface Props {
 
 const InputGroup = styled.span`
   display: flex;
-  flex-direction: column;
 `
 
 export const NameMassForm = ({ onChange, rowCount, rows }: Props) => {
@@ -44,8 +43,8 @@ export const NameMassForm = ({ onChange, rowCount, rows }: Props) => {
           <NameMassInput
             values={rows[id]}
             onChange={(values: NameMass) => onChange({ ...rows, [id]: values })}
-            onRemoveClick={(e) => removeRow(e, id)}
           />
+          <button onClick={(e) => removeRow(e, id)}>Remove Row</button>
         </InputGroup>
       )
     })
