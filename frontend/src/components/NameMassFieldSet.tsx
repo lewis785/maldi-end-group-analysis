@@ -14,7 +14,7 @@ const InputGroup = styled.span`
   display: flex;
 `
 
-export const NameMassForm = ({ onChange, rowCount, rows }: Props) => {
+export const NameMassFieldSet = ({ onChange, rowCount, rows }: Props) => {
   useEffect(() => {
     const initRows: Record<string, NameMass> = {}
     Array.from(Array(rowCount)).forEach(() => {

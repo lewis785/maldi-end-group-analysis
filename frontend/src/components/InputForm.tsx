@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Input } from 'maldi-end-group-analysis'
-import { ConfigFields } from './ConfigFields'
-import { NameMassForm } from './NameMassForm'
+import { NameMassFieldSet } from './NameMassFieldSet'
 
 const Form = styled.form`
   display: flex;
+  flex-wrap: wrap;
 `
 
 interface Props {
@@ -38,25 +38,25 @@ export const InputForm = ({ onValueChange }: Props) => {
 
   return (
     <Form>
-      <NameMassForm
+      <NameMassFieldSet
         key="peaks"
         rows={peaks}
         onChange={(rows) => setPeaks(rows)}
         rowCount={1}
       />
-      <NameMassForm
+      <NameMassFieldSet
         key="monomers"
         rows={monomers}
         onChange={(rows) => setMonomers(rows)}
         rowCount={1}
       />
-      <NameMassForm
+      <NameMassFieldSet
         key="catIons"
         rows={catIons}
         onChange={(rows) => setCatIons(rows)}
         rowCount={2}
       />
-      <NameMassForm
+      <NameMassFieldSet
         key="endGroups"
         rows={endGroups}
         onChange={(rows) => setEndGroups(rows)}
