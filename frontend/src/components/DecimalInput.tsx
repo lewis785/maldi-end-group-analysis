@@ -9,6 +9,7 @@ const Input = styled.input`
 
 interface Props {
   decimalPlaces: number
+  id?: string
   initialValue: number | null
   error?: boolean
   onChange: (value: string) => void
@@ -16,6 +17,7 @@ interface Props {
 
 export const DecimalInput = ({
   decimalPlaces,
+  id,
   initialValue,
   error = false,
   onChange,
@@ -34,6 +36,7 @@ export const DecimalInput = ({
 
   return (
     <Input
+      id={id}
       className={`${error ? 'error' : ''}`}
       type="text"
       value={decimalValue}
