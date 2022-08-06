@@ -9,38 +9,44 @@ const Input = styled.input`
 
 interface Props {
   decimalPlaces: number
-  id?: string
   initialValue: number | null
-  error?: boolean
   onChange: (value: string) => void
+  id?: string
 }
 
 export const DecimalInput = ({
   decimalPlaces,
   id,
   initialValue,
-  error = false,
   onChange,
 }: Props) => {
   const decimalRegex = new RegExp(`^\\d+(\\.\\d{0,${decimalPlaces}})?$`)
   const [decimalValue, setDecimalValue] = useState<string>(
     initialValue ? initialValue.toFixed(decimalPlaces) : ''
   )
+  const [invalid, setInvalid] = useState(false)
 
   const onValueChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (!target.value || target.value.match(decimalRegex)) {
       setDecimalValue(target.value)
       onChange(target.value)
+      setInvalid(false)
     }
+  }
+
+  const validate = () => {
+    console.log(/^d+\\.$/.test(decimalValue))
+    setInvalid(decimalValue === '' || /^\d+\.$/.test(decimalValue))
   }
 
   return (
     <Input
       id={id}
-      className={`${error ? 'error' : ''}`}
+      className={`${invalid ? 'error' : ''}`}
       type="text"
       value={decimalValue}
       onChange={onValueChange}
+      onBlur={validate}
     />
   )
 }
