@@ -4,7 +4,7 @@ interface Props {
   result: MaldiResult
 }
 
-export const Result = ({ result }: Props) => {
+export const ResultRow = ({ result }: Props) => {
   return (
     <tr>
       <td>{result.peak.name}</td>

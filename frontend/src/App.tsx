@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { InputForm } from './components/InputForm'
 import { useMaldi } from './hooks/useMaldi'
 import { Input } from 'maldi-end-group-analysis'
-import { Results } from './components/Results'
+import { ResultsTable } from './components/ResultsTable'
 
 function App() {
   const [input, setInput] = useState<Input>()
@@ -18,7 +18,7 @@ function App() {
     <div className="App">
       <InputForm onValueChange={(value) => setInput(value)} />
       <button onClick={onClick} />
-      <Results results={result} />
+      <ResultsTable results={result} />
     </div>
   )
 }

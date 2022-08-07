@@ -1,13 +1,13 @@
 import { Result as MaldiResult } from 'maldi-end-group-analysis'
-import { Result } from './Result'
+import { ResultRow } from './ResultRow'
 
 interface Props {
   results: MaldiResult[]
 }
 
-export const Results = ({ results }: Props) => {
+export const ResultsTable = ({ results }: Props) => {
   const renderRows = () => {
-    return results.map((result) => <Result result={result} />)
+    return results.map((result) => <ResultRow result={result} />)
   }
 
   return (
