@@ -3,6 +3,13 @@ import { InputForm } from './components/InputForm'
 import { useMaldi } from './hooks/useMaldi'
 import { Input } from 'maldi-end-group-analysis'
 import { ResultsTable } from './components/ResultsTable'
+import styled from 'styled-components'
+
+const Container = styled.main`
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  height: 100vh;
+`
 
 function App() {
   const [input, setInput] = useState<Input>()
@@ -15,11 +22,13 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <Container>
       <InputForm onValueChange={(value) => setInput(value)} />
+      <span>
       <button onClick={onClick}>Generate </button>
       <ResultsTable results={result} />
-    </div>
+      </span>
+    </Container>
   )
 }
 
