@@ -8,13 +8,25 @@ interface Props {
   onChange: (rows: Record<string, NameMass>) => void
   rowCount: Number
   rows: Record<string, NameMass>
+  label: string
 }
+
+const Title = styled.h1`
+  font-size: 1.5rem;
+  width: 100%;
+  text-align: center;
+`
 
 const InputGroup = styled.span`
   display: flex;
 `
 
-export const NameMassFieldSet = ({ onChange, rowCount, rows }: Props) => {
+export const NameMassFieldSet = ({
+  onChange,
+  rowCount,
+  rows,
+  label,
+}: Props) => {
   useEffect(() => {
     const initRows: Record<string, NameMass> = {}
     Array.from(Array(rowCount)).forEach(() => {
@@ -52,6 +64,7 @@ export const NameMassFieldSet = ({ onChange, rowCount, rows }: Props) => {
 
   return (
     <fieldset>
+      <Title>{label}</Title>
       {createRows()}
       <button onClick={addRow}>Add Row</button>
     </fieldset>

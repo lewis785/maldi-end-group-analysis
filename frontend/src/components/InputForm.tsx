@@ -39,25 +39,25 @@ export const InputForm = ({ onValueChange }: Props) => {
   return (
     <Form>
       <NameMassFieldSet
-        key="peaks"
+        label="Peaks"
         rows={peaks}
         onChange={(rows) => setPeaks(rows)}
         rowCount={1}
       />
       <NameMassFieldSet
-        key="monomers"
+        label="Monomers"
         rows={monomers}
         onChange={(rows) => setMonomers(rows)}
         rowCount={1}
       />
       <NameMassFieldSet
-        key="catIons"
+        label="Cat Ions"
         rows={catIons}
         onChange={(rows) => setCatIons(rows)}
         rowCount={2}
       />
       <NameMassFieldSet
-        key="endGroups"
+        label="End Groups"
         rows={endGroups}
         onChange={(rows) => setEndGroups(rows)}
         rowCount={3}
