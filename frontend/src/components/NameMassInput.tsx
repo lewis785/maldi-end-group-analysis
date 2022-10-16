@@ -1,4 +1,4 @@
-import React, { useId, useState } from 'react'
+import React, { useId } from 'react'
 import { NameMass } from '../types'
 import { DecimalInput } from './DecimalInput'
 
@@ -30,10 +30,12 @@ export const NameMassInput = ({ values, onChange }: Props) => {
         type="text"
         value={name}
         onChange={onNameChange}
+        placeholder="Name"
       />
       <label htmlFor={`mass-${id}`}>Mass</label>
       <DecimalInput
         id={`mass-${id}`}
+        placeholder="Mass"
         initialValue={mass}
         onChange={onMassChange}
         decimalPlaces={decimalPlaces}
