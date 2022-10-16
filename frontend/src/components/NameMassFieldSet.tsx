@@ -3,6 +3,7 @@ import { NameMassInput } from './NameMassInput'
 import { NameMass } from '../types'
 import { v4 } from 'uuid'
 import styled from 'styled-components'
+import { CloseIcon } from './Icons'
 
 interface Props {
   onChange: (rows: Record<string, NameMass>) => void
@@ -41,8 +42,7 @@ export const NameMassFieldSet = ({
     onChange({ ...rows, [v4()]: { name: '', mass: 0 } })
   }
 
-  const removeRow = (e: React.MouseEvent, id: string) => {
-    e.preventDefault()
+  const removeRow = (id: string) => {
     const state = { ...rows }
     delete state[id]
     onChange(state)
@@ -56,7 +56,7 @@ export const NameMassFieldSet = ({
             values={rows[id]}
             onChange={(values: NameMass) => onChange({ ...rows, [id]: values })}
           />
-          <button onClick={(e) => removeRow(e, id)}>Remove Row</button>
+          <CloseIcon onClick={() => removeRow(id)} />
         </InputGroup>
       )
     })
