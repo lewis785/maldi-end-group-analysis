@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       <InputForm onValueChange={(value) => setInput(value)} />
-      <button onClick={onClick} />
+      <button onClick={onClick}>Generate </button>
       <ResultsTable results={result} />
     </div>
   )
