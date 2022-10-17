@@ -1,5 +1,5 @@
+import { NameMass } from 'maldi-end-group-analysis'
 import React, { useId } from 'react'
-import { NameMass } from '../types'
 import { DecimalInput } from './DecimalInput'
 
 interface Props {

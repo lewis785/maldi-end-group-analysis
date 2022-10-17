@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { InputForm } from './components/InputForm'
 import { useMaldi } from './hooks/useMaldi'
 import { Input } from 'maldi-end-group-analysis'
@@ -11,9 +11,30 @@ const Container = styled.main`
   height: 100vh;
 `
 
+const initialState: Input = {
+  peaks: [],
+  monomers: [],
+  cations: [],
+  endGroups: [],
+}
+
 function App() {
-  const [input, setInput] = useState<Input>()
+  const [input, setInput] = useState<Input>(initialState)
   const [generateResult, result] = useMaldi()
+
+  useEffect(() => {
+    const state = sessionStorage.getItem('maldi-input')
+    console.log(state)
+    if (state !== null) {
+      setInput(JSON.parse(state))
+    }
+  }, [])
+
+  const onInputChange = (newInput: Input) => {
+    console.log('input Change', { newInput })
+    sessionStorage.setItem('maldi-input', JSON.stringify(newInput))
+    setInput(newInput)
+  }
 
   const onClick = () => {
     if (input !== undefined) {
@@ -23,10 +44,13 @@ function App() {
 
   return (
     <Container>
-      <InputForm onValueChange={(value) => setInput(value)} />
+      <InputForm
+        input={input}
+        onValueChange={(value) => onInputChange(value)}
+      />
       <span>
-      <button onClick={onClick}>Generate </button>
-      <ResultsTable results={result} />
+        <button onClick={onClick}>Generate </button>
+        <ResultsTable results={result} />
       </span>
     </Container>
   )

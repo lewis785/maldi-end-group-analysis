@@ -12,11 +12,13 @@ interface Props {
   initialValue: number | null
   onChange: (value: string) => void
   id?: string
+  placeholder?: string
 }
 
 export const DecimalInput = ({
   decimalPlaces,
   id,
+  placeholder,
   initialValue,
   onChange,
 }: Props) => {
@@ -43,6 +45,7 @@ export const DecimalInput = ({
     <Input
       id={id}
       className={`${invalid ? 'error' : ''}`}
+      placeholder={placeholder}
       type="text"
       value={decimalValue}
       onChange={onValueChange}

@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react'
 import { NameMassInput } from './NameMassInput'
-import { NameMass } from '../types'
-import { v4 } from 'uuid'
 import styled from 'styled-components'
 import { CloseIcon } from './Icons'
+import { NameMass } from 'maldi-end-group-analysis'
 
 interface Props {
-  onChange: (rows: Record<string, NameMass>) => void
+  onChange: (rows: NameMass[]) => void
   rowCount: Number
-  rows: Record<string, NameMass>
+  rows: NameMass[]
   label: string
 }
+
+const Fieldset = styled.fieldset`
+  width: 100%;
+`
 
 const Title = styled.h1`
   font-size: 1.5rem;
@@ -22,51 +24,39 @@ const InputGroup = styled.span`
   display: flex;
 `
 
-export const NameMassFieldSet = ({
-  onChange,
-  rowCount,
-  rows,
-  label,
-}: Props) => {
-  useEffect(() => {
-    const initRows: Record<string, NameMass> = {}
-    Array.from(Array(rowCount)).forEach(() => {
-      initRows[v4()] = { name: '', mass: null }
-    })
-
-    onChange(initRows)
-  }, [])
-
+export const NameMassFieldSet = ({ onChange, rows, label }: Props) => {
   const addRow = (e: React.MouseEvent) => {
     e.preventDefault()
-    onChange({ ...rows, [v4()]: { name: '', mass: 0 } })
+    onChange([...rows, { name: '', mass: 0 }])
   }
 
-  const removeRow = (id: string) => {
-    const state = { ...rows }
-    delete state[id]
-    onChange(state)
+  const removeRow = (index: number) => {
+    onChange([...rows.slice(0, index), ...rows.slice(index + 1)])
+  }
+
+  const updateRow = (index: number, values: NameMass) => {
+    onChange([...rows.slice(0, index), values, ...rows.slice(index + 1)])
   }
 
   const createRows = () => {
-    return Object.keys(rows).map((id) => {
+    return Object.values(rows).map((row, index) => {
       return (
-        <InputGroup key={id}>
+        <InputGroup key={`group-${index}`}>
           <NameMassInput
-            values={rows[id]}
-            onChange={(values: NameMass) => onChange({ ...rows, [id]: values })}
+            values={row}
+            onChange={(values: NameMass) => updateRow(index, values)}
           />
-          <CloseIcon onClick={() => removeRow(id)} />
+          <CloseIcon onClick={() => removeRow(index)} />
         </InputGroup>
       )
     })
   }
 
   return (
-    <fieldset>
+    <Fieldset>
       <Title>{label}</Title>
       {createRows()}
       <button onClick={addRow}>Add Row</button>
-    </fieldset>
+    </Fieldset>
   )
 }
