@@ -12,10 +12,13 @@ const Container = styled.main`
 `
 
 const initialState: Input = {
-  peaks: [],
-  monomers: [],
-  cations: [],
-  endGroups: [],
+  peaks: [{ name: '', mass: 0 }],
+  monomers: [{ name: '', mass: 0 }],
+  cations: [
+    { name: '', mass: 0 },
+    { name: '', mass: 0 },
+  ],
+  endGroups: [{ name: '', mass: 0 }],
 }
 
 function App() {
