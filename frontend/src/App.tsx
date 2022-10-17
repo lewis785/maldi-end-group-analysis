@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { InputForm } from './components/InputForm'
 import { useMaldi } from './hooks/useMaldi'
 import { Input } from 'maldi-end-group-analysis'
-import { ResultsTable } from './components/ResultsTable'
 import styled from 'styled-components'
+import { ResultDisplay } from './components/ResultDisplay'
 
 const Container = styled.main`
   display: grid;
@@ -24,7 +24,7 @@ function App() {
 
   useEffect(() => {
     const state = sessionStorage.getItem('maldi-input')
-    console.log(state)
+    console.log('RENDERED', { state })
     if (state !== null) {
       setInput(JSON.parse(state))
     }
@@ -49,8 +49,8 @@ function App() {
         onValueChange={(value) => onInputChange(value)}
       />
       <span>
-        <button onClick={onClick}>Generate </button>
-        <ResultsTable results={result} />
+        <button onClick={onClick}>Generate</button>
+        <ResultDisplay results={result} />
       </span>
     </Container>
   )
