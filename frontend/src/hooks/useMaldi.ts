@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
 import { generateMaldiResults, Input, Result } from 'maldi-end-group-analysis'
 
-export const useMaldi = (): [(input: Input) => void, Result[]] => {
+export const useMaldi = (): [
+  (input: Input, difference: number) => void,
+  Result[]
+] => {
   const [result, setResult] = useState<Result[]>(
     JSON.parse(sessionStorage.getItem('maldi-results') || '[]')
   )
@@ -10,8 +13,8 @@ export const useMaldi = (): [(input: Input) => void, Result[]] => {
     sessionStorage.setItem('maldi-results', JSON.stringify(result))
   }, [result])
 
-  const generateResult = (input: Input) => {
-    setResult(generateMaldiResults(input, 0))
+  const generateResult = (input: Input, difference: number) => {
+    setResult(generateMaldiResults(input, difference))
   }
 
   return [generateResult, result]

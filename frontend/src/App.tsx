@@ -4,6 +4,7 @@ import { useMaldi } from './hooks/useMaldi'
 import { Input } from 'maldi-end-group-analysis'
 import styled from 'styled-components'
 import { ResultDisplay } from './components/ResultDisplay'
+import { DecimalInput } from './components/DecimalInput'
 
 const Container = styled.main`
   display: grid;
@@ -23,6 +24,7 @@ const initialState: Input = {
 
 function App() {
   const [input, setInput] = useState<Input>(initialState)
+  const [difference, setDifference] = useState<number>(0)
   const [generateResult, result] = useMaldi()
 
   useEffect(() => {
@@ -41,7 +43,7 @@ function App() {
 
   const onClick = () => {
     if (input !== undefined) {
-      generateResult(input)
+      generateResult(input, difference)
     }
   }
 
@@ -52,6 +54,12 @@ function App() {
         onValueChange={(value) => onInputChange(value)}
       />
       <span>
+        <DecimalInput
+          placeholder="Difference"
+          decimalPlaces={2}
+          initialValue={difference}
+          onChange={(value) => setDifference(Number(value))}
+        />
         <button onClick={onClick}>Generate</button>
         <ResultDisplay results={result} />
       </span>
