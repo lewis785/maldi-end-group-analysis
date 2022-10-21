@@ -7,6 +7,16 @@ provider "aws" {
   }
 }
 
+provider "aws" {
+  alias  = "acm"
+  region = "us-east-1"
+    default_tags {
+    tags = {
+      Project = "Maldi"
+    }
+  }
+}
+
 terraform {
   backend "s3" {
     bucket = "lfm-terraform"
@@ -61,4 +71,16 @@ resource "aws_s3_bucket_policy" "maldi_lfm_dev" {
       },
     ]
   })
+}
+
+### Certification
+
+resource "aws_acm_certificate" "cert" {
+  provider          = aws.acm
+  domain_name       = "maldi.lfm.dev"
+  validation_method = "DNS"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
