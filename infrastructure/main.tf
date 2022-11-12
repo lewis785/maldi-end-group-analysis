@@ -10,11 +10,15 @@ provider "aws" {
 provider "aws" {
   alias  = "acm"
   region = "us-east-1"
-    default_tags {
+  default_tags {
     tags = {
       Project = "Maldi"
     }
   }
+}
+
+locals {
+  domain = "maldi.lfm.dev"
 }
 
 terraform {
@@ -26,7 +30,7 @@ terraform {
 }
 
 resource "aws_s3_bucket" "maldi_lfm_dev" {
-  bucket = "maldi.lfm.dev"
+  bucket = local.domain
 }
 
 resource "aws_s3_bucket_versioning" "maldi_lfm_dev" {
@@ -50,37 +54,116 @@ resource "aws_s3_bucket_website_configuration" "maldi_lfm_dev" {
 
 resource "aws_s3_bucket_acl" "maldi_lfm_dev" {
   bucket = aws_s3_bucket.maldi_lfm_dev.id
+  acl    = "private"
+}
 
-  acl = "public-read"
+data "aws_iam_policy_document" "s3_policy" {
+  statement {
+    sid       = "CloudfrontReadGetObject"
+    actions   = ["s3:GetObject"]
+    resources = ["${aws_s3_bucket.maldi_lfm_dev.arn}/*"]
+
+    principals {
+      type        = "AWS"
+      identifiers = [aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn]
+    }
+  }
 }
 
 resource "aws_s3_bucket_policy" "maldi_lfm_dev" {
   bucket = aws_s3_bucket.maldi_lfm_dev.id
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Sid       = "PublicReadGetObject"
-        Effect    = "Allow"
-        Principal = "*"
-        Action    = "s3:GetObject"
-        Resource = [
-          "${aws_s3_bucket.maldi_lfm_dev.arn}/*",
-        ]
-      },
-    ]
-  })
+  policy = data.aws_iam_policy_document.s3_policy.json
 }
 
 ### Certification
 
 resource "aws_acm_certificate" "cert" {
   provider          = aws.acm
-  domain_name       = "maldi.lfm.dev"
+  domain_name       = local.domain
   validation_method = "DNS"
 
   lifecycle {
     create_before_destroy = true
   }
+}
+
+
+### Cloudfront
+
+resource "aws_cloudfront_distribution" "s3_distribution" {
+  depends_on = [
+    aws_s3_bucket.maldi_lfm_dev
+  ]
+
+  origin {
+    domain_name = aws_s3_bucket.maldi_lfm_dev.bucket_regional_domain_name
+    origin_id   = local.domain
+
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
+    }
+  }
+
+  enabled             = true
+  is_ipv6_enabled     = true
+  default_root_object = "index.html"
+
+  aliases = [local.domain]
+
+  default_cache_behavior {
+    allowed_methods = [
+      "GET",
+      "HEAD",
+    ]
+
+    cached_methods = [
+      "GET",
+      "HEAD",
+    ]
+
+    target_origin_id = local.domain
+
+    forwarded_values {
+      query_string = false
+
+      cookies {
+        forward = "none"
+      }
+    }
+
+    viewer_protocol_policy = "redirect-to-https"
+
+    min_ttl     = 0
+    default_ttl = 86400
+    max_ttl     = 31536000
+  }
+
+  price_class = "PriceClass_100"
+
+  restrictions {
+    geo_restriction {
+      restriction_type = "none"
+      locations        = []
+    }
+  }
+
+  viewer_certificate {
+    acm_certificate_arn      = aws_acm_certificate.cert.arn
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
+
+  }
+
+  custom_error_response {
+    error_code            = 404
+    response_code         = 200
+    error_caching_min_ttl = 10
+    response_page_path    = "/index.html"
+  }
+
+  wait_for_deployment = false
+}
+
+resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
+  comment = "access-identity-${local.domain}.s3.amazonaws.com"
 }
