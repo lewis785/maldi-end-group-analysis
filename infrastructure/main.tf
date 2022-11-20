@@ -167,3 +167,51 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
   comment = "access-identity-${local.domain}.s3.amazonaws.com"
 }
+
+
+### Policies
+
+resource "aws_iam_policy" "s3_malid_write_policy" {
+  name = "maldi_s3_write_access"
+  path = "/"
+  policy = jsonencode(
+    {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Action" : [
+            "s3:ListBucket"
+          ],
+          "Effect" : "Allow",
+          "Resource" : "arn:aws:s3:::${aws_s3_bucket.maldi_lfm_dev.id}"
+        },
+        {
+          "Action" : [
+            "s3:DeleteObject",
+            "s3:PutObject",
+            "s3:PutObjectAcl"
+          ],
+          "Effect" : "Allow",
+          "Resource" : "arn:aws:s3:::${aws_s3_bucket.maldi_lfm_dev.id}/*"
+        }
+      ]
+    }
+  )
+}
+
+resource "aws_iam_policy" "cloudfront_create_invalidation" {
+  name = "maldi_cloudfront_create_invalidation"
+  path = "/"
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "cloudfront:CreateInvalidation"
+        ],
+        "Resource" : aws_cloudfront_distribution.s3_distribution.arn
+      }
+    ]
+  })
+}
