@@ -29,7 +29,7 @@ export const InputForm = ({ input, onValueChange }: Props) => {
         rowCount={1}
       />
       <NameMassFieldSet
-        label="Cat Ions"
+        label="Cations"
         rows={input.cations}
         onChange={(rows) => onValueChange({ ...input, cations: rows })}
         rowCount={2}
