@@ -21,26 +21,26 @@ export const InputForm = ({ input, onValueChange }: Props) => {
         rows={input.peaks}
         onChange={(rows) => onValueChange({ ...input, peaks: rows })}
         rowCount={1}
-        addRows
       />
       <NameMassFieldSet
         label="Monomers"
         rows={input.monomers}
         onChange={(rows) => onValueChange({ ...input, monomers: rows })}
         rowCount={1}
+        fixedRows
       />
       <NameMassFieldSet
         label="Cations"
         rows={input.cations}
         onChange={(rows) => onValueChange({ ...input, cations: rows })}
         rowCount={2}
+        fixedRows
       />
       <NameMassFieldSet
         label="End Groups"
         rows={input.endGroups}
         onChange={(rows) => onValueChange({ ...input, endGroups: rows })}
         rowCount={3}
-        addRows
       />
     </Form>
   )

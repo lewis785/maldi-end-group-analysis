@@ -1,13 +1,14 @@
 import styled from 'styled-components'
 import { NameMass } from 'maldi-end-group-analysis'
 import { InputRows } from './InputRows'
+import { shouldAddRow, shouldRemoveRow } from '../utils/row'
 
 interface Props {
   onChange: (rows: NameMass[]) => void
   rowCount: Number
   rows: NameMass[]
   label: string
-  addRows?: boolean
+  fixedRows?: boolean
 }
 
 const Header = styled.header`
@@ -39,19 +40,25 @@ export const NameMassFieldSet = ({
   onChange,
   rows,
   label,
-  addRows = false,
+  fixedRows = false,
 }: Props) => {
-  const addRow = (e: React.MouseEvent) => {
-    e.preventDefault()
+  const addRow = () => {
     onChange([...rows, { name: '', mass: 0 }])
   }
 
-  const removeRow = (index: number) => {
+  const removeRow = (rows: NameMass[], index: number) => {
     onChange([...rows.slice(0, index), ...rows.slice(index + 1)])
   }
 
   const updateRow = (index: number, values: NameMass) => {
-    onChange([...rows.slice(0, index), values, ...rows.slice(index + 1)])
+    const newRows = [...rows.slice(0, index), values, ...rows.slice(index + 1)]
+    onChange(newRows)
+    if (!fixedRows && shouldAddRow(newRows)) {
+      addRow()
+    }
+    if (!fixedRows && shouldRemoveRow(newRows)) {
+      removeRow(newRows, newRows.length - 1)
+    }
   }
 
   return (
@@ -63,7 +70,6 @@ export const NameMassFieldSet = ({
         <h3>Mass</h3>
       </Header>
       <InputRows rows={rows} onChange={updateRow} />
-      {addRows && <button onClick={addRow}>Add Row</button>}
     </Fieldset>
   )
 }
