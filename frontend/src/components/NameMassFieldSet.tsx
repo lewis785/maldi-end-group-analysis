@@ -52,13 +52,14 @@ export const NameMassFieldSet = ({
 
   const updateRow = (index: number, values: NameMass) => {
     const newRows = [...rows.slice(0, index), values, ...rows.slice(index + 1)]
-    onChange(newRows)
     if (!fixedRows && shouldAddRow(newRows)) {
       addRow()
     }
     if (!fixedRows && shouldRemoveRow(newRows)) {
-      removeRow(newRows, newRows.length - 1)
+      return removeRow(newRows, newRows.length - 1)
     }
+
+    onChange(newRows)
   }
 
   return (
