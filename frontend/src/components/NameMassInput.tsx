@@ -2,6 +2,7 @@ import { NameMass } from 'maldi-end-group-analysis'
 import React, { useId } from 'react'
 import styled from 'styled-components'
 import { DecimalInput } from './DecimalInput'
+import { Input } from './inputs/Input'
 
 interface Props {
   values: NameMass
@@ -30,15 +31,13 @@ export const NameMassInput = ({ values, onChange }: Props) => {
 
   return (
     <Row>
-      <input
-        id={`name-${id}`}
+      <Input
         type="text"
         value={name}
         onChange={onNameChange}
         placeholder="Name"
       />
       <DecimalInput
-        id={`mass-${id}`}
         placeholder="Mass"
         initialValue={mass}
         onChange={onMassChange}

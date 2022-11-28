@@ -1,23 +1,15 @@
 import { ChangeEvent, useState } from 'react'
-import styled from 'styled-components'
-
-const Input = styled.input`
-  &.error {
-    border: 1px solid red;
-  }
-`
+import { Input } from './inputs/Input'
 
 interface Props {
   decimalPlaces: number
   initialValue: number | null
   onChange: (value: string) => void
-  id?: string
   placeholder?: string
 }
 
 export const DecimalInput = ({
   decimalPlaces,
-  id,
   placeholder,
   initialValue,
   onChange,
@@ -43,7 +35,6 @@ export const DecimalInput = ({
 
   return (
     <Input
-      id={id}
       className={`${invalid ? 'error' : ''}`}
       placeholder={placeholder}
       type="text"
