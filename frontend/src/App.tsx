@@ -29,14 +29,12 @@ function App() {
 
   useEffect(() => {
     const state = sessionStorage.getItem('maldi-input')
-    console.log('RENDERED', { state })
     if (state !== null) {
       setInput(JSON.parse(state))
     }
   }, [])
 
   const onInputChange = (newInput: Input) => {
-    console.log('input Change', { newInput })
     sessionStorage.setItem('maldi-input', JSON.stringify(newInput))
     setInput(newInput)
   }

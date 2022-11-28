@@ -52,7 +52,7 @@ export const NameMassFieldSet = ({
 
   const updateRow = (index: number, values: NameMass) => {
     const newRows = [...rows.slice(0, index), values, ...rows.slice(index + 1)]
-    console.log({ fixedRows, sould: shouldAddRow(newRows) })
+
     if (!fixedRows && shouldAddRow(newRows)) {
       return addRow(newRows)
     }

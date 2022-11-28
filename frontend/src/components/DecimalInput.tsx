@@ -29,7 +29,6 @@ export const DecimalInput = ({
   }
 
   const validate = () => {
-    console.log(/^d+\\.$/.test(decimalValue))
     setInvalid(decimalValue === '' || /^\d+\.$/.test(decimalValue))
   }
 
