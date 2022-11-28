@@ -42,7 +42,7 @@ export const NameMassFieldSet = ({
   label,
   fixedRows = false,
 }: Props) => {
-  const addRow = () => {
+  const addRow = (rows: NameMass[]) => {
     onChange([...rows, { name: '', mass: 0 }])
   }
 
@@ -52,8 +52,9 @@ export const NameMassFieldSet = ({
 
   const updateRow = (index: number, values: NameMass) => {
     const newRows = [...rows.slice(0, index), values, ...rows.slice(index + 1)]
+    console.log({ fixedRows, sould: shouldAddRow(newRows) })
     if (!fixedRows && shouldAddRow(newRows)) {
-      addRow()
+      return addRow(newRows)
     }
     if (!fixedRows && shouldRemoveRow(newRows)) {
       return removeRow(newRows, newRows.length - 1)
