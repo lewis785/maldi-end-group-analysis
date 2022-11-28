@@ -1,11 +1,17 @@
 import { NameMass } from 'maldi-end-group-analysis'
 import React, { useId } from 'react'
+import styled from 'styled-components'
 import { DecimalInput } from './DecimalInput'
 
 interface Props {
   values: NameMass
   onChange: (values: NameMass) => void
 }
+
+const Row = styled.div`
+  display: flex;
+  justify-content: space-around;
+`
 
 export const NameMassInput = ({ values, onChange }: Props) => {
   const decimalPlaces = 3
@@ -23,8 +29,7 @@ export const NameMassInput = ({ values, onChange }: Props) => {
   }
 
   return (
-    <>
-      <label htmlFor={`name-${id}`}>Name</label>
+    <Row>
       <input
         id={`name-${id}`}
         type="text"
@@ -32,7 +37,6 @@ export const NameMassInput = ({ values, onChange }: Props) => {
         onChange={onNameChange}
         placeholder="Name"
       />
-      <label htmlFor={`mass-${id}`}>Mass</label>
       <DecimalInput
         id={`mass-${id}`}
         placeholder="Mass"
@@ -40,6 +44,6 @@ export const NameMassInput = ({ values, onChange }: Props) => {
         onChange={onMassChange}
         decimalPlaces={decimalPlaces}
       />
-    </>
+    </Row>
   )
 }
