@@ -10,16 +10,17 @@ interface Props {
 const RowsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
 `
 
 export const InputRows = ({ rows, onChange }: Props) => {
   return (
     <RowsContainer>
-      {Object.values(rows).map((row, index) => (
+      {Object.values(rows).map(({ name, mass }, index) => (
         <NameMassInput
           key={`group-${index}`}
-          values={row}
+          name={name}
+          mass={mass}
           onChange={(values) => onChange(index, values)}
         />
       ))}
