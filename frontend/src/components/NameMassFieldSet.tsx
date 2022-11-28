@@ -1,6 +1,4 @@
-import { NameMassInput } from './NameMassInput'
 import styled from 'styled-components'
-import { CloseIcon } from './Icons'
 import { NameMass } from 'maldi-end-group-analysis'
 import { InputRows } from './InputRows'
 
@@ -9,12 +7,8 @@ interface Props {
   rowCount: Number
   rows: NameMass[]
   label: string
+  addRows?: boolean
 }
-
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-`
 
 const Header = styled.header`
   display: flex;
@@ -22,6 +16,9 @@ const Header = styled.header`
 `
 
 const Fieldset = styled.fieldset`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   width: 100%;
   padding: 1rem;
 `
@@ -38,7 +35,12 @@ const Inputs = styled.div`
   gap: 0.5rem;
 `
 
-export const NameMassFieldSet = ({ onChange, rows, label }: Props) => {
+export const NameMassFieldSet = ({
+  onChange,
+  rows,
+  label,
+  addRows = false,
+}: Props) => {
   const addRow = (e: React.MouseEvent) => {
     e.preventDefault()
     onChange([...rows, { name: '', mass: 0 }])
@@ -55,12 +57,13 @@ export const NameMassFieldSet = ({ onChange, rows, label }: Props) => {
   return (
     <Fieldset>
       <Title>{label}</Title>
+      <hr />
       <Header>
         <h3>Name</h3>
         <h3>Mass</h3>
       </Header>
       <InputRows rows={rows} onChange={updateRow} />
-      <button onClick={addRow}>Add Row</button>
+      {addRows && <button onClick={addRow}>Add Row</button>}
     </Fieldset>
   )
 }

@@ -21,6 +21,7 @@ export const InputForm = ({ input, onValueChange }: Props) => {
         rows={input.peaks}
         onChange={(rows) => onValueChange({ ...input, peaks: rows })}
         rowCount={1}
+        addRows
       />
       <NameMassFieldSet
         label="Monomers"
@@ -39,6 +40,7 @@ export const InputForm = ({ input, onValueChange }: Props) => {
         rows={input.endGroups}
         onChange={(rows) => onValueChange({ ...input, endGroups: rows })}
         rowCount={3}
+        addRows
       />
     </Form>
   )
