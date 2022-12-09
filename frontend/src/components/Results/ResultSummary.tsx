@@ -10,8 +10,7 @@ const Summary = styled.summary`
 `
 
 const Text = styled.p`
-  padding: 0;
-  margin: 0;
+  text-align: center;
 `
 
 interface Props {
