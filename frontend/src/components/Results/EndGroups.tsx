@@ -17,10 +17,14 @@ interface Props {
 }
 
 export const EndGroups = ({ endGroups }: Props) => {
+  const name = ({ name }: NameMass) => {
+    return name === 'empty' ? '-' : name
+  }
+
   return (
     <Span>
-      <Text>{endGroups[0].name}</Text>
-      <Text>{endGroups[1].name}</Text>
+      <Text>{name(endGroups[0])}</Text>
+      <Text>{name(endGroups[1])}</Text>
     </Span>
   )
 }
