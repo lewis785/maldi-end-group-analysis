@@ -5,11 +5,16 @@ import { Input } from 'maldi-end-group-analysis'
 import styled from 'styled-components'
 import { ResultDisplay } from './components/ResultDisplay'
 import { DecimalInput } from './components/DecimalInput'
+import { SliderInput } from './components/inputs/SliderInput'
 
 const Container = styled.main`
   display: grid;
   grid-template-columns: 1fr 2fr;
   height: 100vh;
+`
+const HStack = styled.div`
+  display: flex;
+  flex-direction: column;
 `
 
 const initialState: Input = {
@@ -51,16 +56,16 @@ function App() {
         input={input}
         onValueChange={(value) => onInputChange(value)}
       />
-      <span>
-        <DecimalInput
-          placeholder="Difference"
-          decimalPlaces={2}
-          initialValue={difference}
-          onChange={(value) => setDifference(Number(value))}
+        <HStack>
+          <SliderInput
+            min={0}
+            max={100}
+            value={difference}
+            onChange={(newValue) => setDifference(newValue)}
         />
         <button onClick={onClick}>Generate</button>
         <ResultDisplay results={result} />
-      </span>
+        </HStack>
     </Container>
   )
 }
