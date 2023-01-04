@@ -1,5 +1,10 @@
 import { Result as MaldiResult } from 'maldi-end-group-analysis'
 import { ResultsTable } from './ResultsTable'
+import styled from 'styled-components'
+
+const ResultSection = styled.section`
+  padding: 0 1.5rem;
+`
 
 interface Props {
   results: MaldiResult[]
@@ -25,5 +30,5 @@ export const ResultDisplay = ({ results }: Props) => {
     })
   }
 
-  return <>{renderTables(peakResults)}</>
+  return <ResultSection>{renderTables(peakResults)}</ResultSection>
 }
