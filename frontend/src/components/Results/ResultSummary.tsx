@@ -1,10 +1,10 @@
-import { Result } from 'maldi-end-group-analysis'
+import { NameMass, Result } from 'maldi-end-group-analysis'
 import styled from 'styled-components'
 import { EndGroups } from './EndGroups'
 
 const Summary = styled.summary`
   display: grid;
-  grid-template-columns: 0.5fr 1fr 1fr 1fr;
+  grid-template-columns: 0.5fr repeat(4, 1ch 1fr);
   column-gap: 1rem;
   align-items: center;
 `
@@ -19,13 +19,25 @@ interface Props {
 
 export const ResultSummary = ({ result }: Props) => {
   const { mass, endGroups, monomers, cation } = result
+
+  const name = ({ name }: NameMass) => {
+    return name === 'empty' ? '-' : name
+  }
+
+  const difference = parseFloat((mass.target - mass.actual).toFixed(3))
+
   return (
     <Summary>
       <Text>
-        {mass.actual} ({mass.target - mass.actual})
+        {mass.actual} ({difference})
       </Text>
-      <EndGroups endGroups={endGroups} />
+      <div />
+      <Text>{name(endGroups[0])}</Text>
+      <div />
+      <Text>{name(endGroups[1])}</Text>
+      <div />
       <Text>{cation.name}</Text>
+      <div />
       <Text>
         {monomers[0].name} ({monomers[0].count})
       </Text>

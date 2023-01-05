@@ -7,20 +7,28 @@ interface Props {
   results: Result[]
 }
 
-const ResultContainer = styled.section`
+const ResultContainer = styled.article`
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  gap: 4px;
+  gap: 0.25rem;
+`
+
+const ResultList = styled.ol`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  list-style: none;
 `
 
 export const Results = ({ results }: Props) => {
   return (
     <ResultContainer>
       <PeakTitle result={results[0]} />
-      {results.map((result) => (
-        <ResultDetail result={result} />
-      ))}
+      <ResultList>
+        {results.map((result) => (
+          <ResultDetail result={result} />
+        ))}
+      </ResultList>
     </ResultContainer>
   )
 }
