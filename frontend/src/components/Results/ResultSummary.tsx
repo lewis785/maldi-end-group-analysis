@@ -1,6 +1,5 @@
 import { NameMass, Result } from 'maldi-end-group-analysis'
 import styled from 'styled-components'
-import { EndGroups } from './EndGroups'
 
 const Summary = styled.summary`
   display: grid;
