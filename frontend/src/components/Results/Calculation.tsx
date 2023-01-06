@@ -8,7 +8,7 @@ interface Props {
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 0.5fr repeat(4, 1ch 1fr);
+  grid-template-columns: 1ch 0.5fr repeat(4, 1ch 1fr);
   column-gap: 1rem;
   align-items: center;
 `
@@ -20,6 +20,7 @@ const GridItem = styled.p`
 export const Calculation = ({ result }: Props) => {
   return (
     <Grid>
+      <div />
       <GridItem>{result.mass.actual}</GridItem>
       <EqualIcon />
       <GridItem>{result.endGroups[0].mass}</GridItem>

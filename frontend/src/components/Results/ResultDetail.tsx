@@ -21,7 +21,7 @@ export const ResultDetail = ({ result }: Props) => {
 
   return (
     <Detail onClick={toggleExpand}>
-      <ResultSummary result={result} />
+      <ResultSummary result={result} expanded={expanded} />
       {expanded && (
         <>
           <hr />
