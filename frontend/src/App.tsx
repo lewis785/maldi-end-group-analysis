@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { InputForm } from './components/InputForm'
 import { useMaldi } from './hooks/useMaldi'
 import { Input } from 'maldi-end-group-analysis'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import { ResultDisplay } from './components/ResultDisplay'
-import { DecimalInput } from './components/DecimalInput'
+import { lightTheme } from './style/theme'
 import { SliderInput } from './components/inputs/SliderInput'
 
 const Container = styled.main`
@@ -15,6 +15,7 @@ const Container = styled.main`
 const HStack = styled.div`
   display: flex;
   flex-direction: column;
+  background: ${({ theme }) => theme.primary.white};
 `
 
 const initialState: Input = {
@@ -51,6 +52,7 @@ function App() {
   }
 
   return (
+    <ThemeProvider theme={lightTheme}>
     <Container>
       <InputForm
         input={input}
@@ -67,6 +69,7 @@ function App() {
         <ResultDisplay results={result} />
         </HStack>
     </Container>
+    </ThemeProvider>
   )
 }
 

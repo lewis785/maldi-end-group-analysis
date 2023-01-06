@@ -14,7 +14,6 @@ const Detail = styled.li`
   gap: 1rem;
   border: solid 1px black;
   padding: 1rem;
-  /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
 `
 
 export const ResultDetail = ({ result }: Props) => {
