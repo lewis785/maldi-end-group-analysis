@@ -12,7 +12,7 @@ const Detail = styled.li`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  border: solid 1px black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   padding: 1rem;
 `
 

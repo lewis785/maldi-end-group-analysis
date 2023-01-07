@@ -16,8 +16,9 @@ const ResultContainer = styled.article`
 const ResultList = styled.ol`
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
   list-style: none;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-bottom: 0;
 `
 
 export const Results = ({ results }: Props) => {
