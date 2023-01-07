@@ -7,6 +7,7 @@ const Form = styled.form`
   flex-wrap: wrap;
   height: 100%;
   background: ${({ theme }) => theme.primary.white};
+  border-right: 1px solid rgba(0, 0, 0, 1);
 `
 
 interface Props {

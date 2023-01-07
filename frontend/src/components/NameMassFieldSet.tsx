@@ -22,6 +22,7 @@ const Fieldset = styled.fieldset`
   gap: 1rem;
   width: 100%;
   padding: 1rem;
+  border: 0;
 `
 
 const Title = styled.h1`
