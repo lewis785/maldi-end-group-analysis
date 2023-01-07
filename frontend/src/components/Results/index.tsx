@@ -25,8 +25,8 @@ export const Results = ({ results }: Props) => {
     <ResultContainer>
       <PeakTitle result={results[0]} />
       <ResultList>
-        {results.map((result) => (
-          <ResultDetail result={result} />
+        {results.map((result, index) => (
+          <ResultDetail key={`result-${index}`} result={result} />
         ))}
       </ResultList>
     </ResultContainer>

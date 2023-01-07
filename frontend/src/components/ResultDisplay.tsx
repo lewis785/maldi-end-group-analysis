@@ -25,8 +25,8 @@ export const ResultDisplay = ({ results }: Props) => {
   )
 
   const renderTables = (peakResults: { [key: string]: MaldiResult[] }) => {
-    return Object.values(peakResults).map((result) => {
-      return <Results results={result} />
+    return Object.values(peakResults).map((result, index) => {
+      return <Results key={`results-${index}`} results={result} />
     })
   }
 
