@@ -12,11 +12,6 @@ const Container = styled.main`
   grid-template-columns: 1fr 2fr;
   height: 100vh;
 `
-const HStack = styled.div`
-  display: flex;
-  flex-direction: column;
-  background: ${({ theme }) => theme.primary.white};
-`
 
 const initialState: Input = {
   peaks: [{ name: '', mass: 0 }],
