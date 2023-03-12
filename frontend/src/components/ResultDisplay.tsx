@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 const ResultSection = styled.section`
   padding: 0 1.5rem;
+  overflow-y: auto;
 `
 
 interface Props {
