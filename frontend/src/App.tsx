@@ -56,18 +56,12 @@ function App() {
     <Container>
       <InputForm
         input={input}
+          difference={difference}
         onValueChange={(value) => onInputChange(value)}
+          onDifferenceChange={(newValue) => setDifference(newValue)}
+          onSubmit={onClick}
       />
-        <HStack>
-          <SliderInput
-            min={0}
-            max={100}
-            value={difference}
-            onChange={(newValue) => setDifference(newValue)}
-        />
-        <button onClick={onClick}>Generate</button>
         <ResultDisplay results={result} />
-        </HStack>
     </Container>
     </ThemeProvider>
   )
