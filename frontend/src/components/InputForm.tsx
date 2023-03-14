@@ -12,7 +12,11 @@ const InputSection = styled.section`
 
 const Form = styled.form`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  max-width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem 1rem;
 `
 
 interface Props {

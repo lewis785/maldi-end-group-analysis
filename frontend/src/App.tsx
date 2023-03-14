@@ -5,12 +5,11 @@ import { Input } from 'maldi-end-group-analysis'
 import styled, { ThemeProvider } from 'styled-components'
 import { ResultDisplay } from './components/ResultDisplay'
 import { lightTheme } from './style/theme'
-import { SliderInput } from './components/inputs/SliderInput'
 
 const Container = styled.main`
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  height: 100vh;
+  display: flex;
+  min-height: 100vh;
+  max-height: 100vh;
 `
 
 const initialState: Input = {
@@ -48,16 +47,16 @@ function App() {
 
   return (
     <ThemeProvider theme={lightTheme}>
-    <Container>
-      <InputForm
-        input={input}
+      <Container>
+        <InputForm
+          input={input}
           difference={difference}
-        onValueChange={(value) => onInputChange(value)}
+          onValueChange={(value) => onInputChange(value)}
           onDifferenceChange={(newValue) => setDifference(newValue)}
           onSubmit={onClick}
-      />
+        />
         <ResultDisplay results={result} />
-    </Container>
+      </Container>
     </ThemeProvider>
   )
 }
