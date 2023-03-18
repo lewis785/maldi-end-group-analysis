@@ -2,12 +2,14 @@ import styled from 'styled-components'
 import { Input } from 'maldi-end-group-analysis'
 import { NameMassFieldSet } from './NameMassFieldSet'
 import { SliderInput } from './inputs/SliderInput'
+import { Button } from './buttons/Button'
 
 const InputSection = styled.section`
   display: flex;
   flex-direction: column;
+  width: max(25%, 20rem);
   background: ${({ theme }) => theme.primary.white};
-  border-right: 1px solid rgba(0, 0, 0, 1);
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
 `
 
 const Form = styled.form`
@@ -17,6 +19,16 @@ const Form = styled.form`
   height: 100%;
   overflow-y: auto;
   padding: 1rem 1rem;
+  justify-content: space-around;
+`
+
+const Actions = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: rgba(46, 46, 46, 0.1);
+  padding: 1rem 2rem;
+  border-top: 2px solid rgba(46, 46, 46, 0.3);
 `
 
 interface Props {
@@ -64,15 +76,15 @@ export const InputForm = ({
           rowCount={3}
         />
       </Form>
-      <div>
+      <Actions>
         <SliderInput
           min={0}
           max={100}
           value={difference}
           onChange={onDifferenceChange}
         />
-        <button onClick={onSubmit}>Generate</button>
-      </div>
+        <Button onClickHandler={onSubmit}>Generate</Button>
+      </Actions>
     </InputSection>
   )
 }
