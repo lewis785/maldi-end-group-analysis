@@ -6,7 +6,7 @@ const InputField = styled.input`
   padding: 0.5rem;
   border-radius: 2px;
   border: 1px solid rgba(0, 0, 0, 0.4);
-  background: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, 0.8);
   min-width: 0;
 
   &.error {
