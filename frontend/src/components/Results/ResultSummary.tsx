@@ -7,7 +7,6 @@ const Summary = styled.summary`
   grid-template-columns: 1ch 0.5fr repeat(4, 1ch 1fr);
   column-gap: 1rem;
   align-items: center;
-  color: ${({ theme }) => theme.primary.text};
 `
 
 const Text = styled.p`
