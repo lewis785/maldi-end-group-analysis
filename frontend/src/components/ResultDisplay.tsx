@@ -3,7 +3,10 @@ import { Results } from './Results'
 import styled from 'styled-components'
 
 const ResultSection = styled.section`
-  padding: 0 1.5rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem 1.5rem;
   overflow-y: auto;
 `
 

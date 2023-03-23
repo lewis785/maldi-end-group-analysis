@@ -10,6 +10,7 @@ interface Props {
 const ResultContainer = styled.article`
   display: flex;
   flex-direction: column;
+  width: clamp(26rem, 100%, 64rem);
   gap: 0.25rem;
 `
 
