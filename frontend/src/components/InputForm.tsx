@@ -7,7 +7,9 @@ import { Button } from './buttons/Button'
 const InputSection = styled.section`
   display: flex;
   flex-direction: column;
-  width: max(25%, 20rem);
+  width: min(20rem, 100%);
+  flex-basis: 100px;
+  flex-grow: 1;
   background: ${({ theme }) => theme.primary.white};
   border-right: 1px solid rgba(0, 0, 0, 0.3);
 `

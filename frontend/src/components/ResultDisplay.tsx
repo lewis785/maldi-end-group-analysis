@@ -5,7 +5,8 @@ import styled from 'styled-components'
 const ResultSection = styled.section`
   display: flex;
   justify-content: center;
-  width: 100%;
+  flex-grow: 999;
+  flex-basis: 500px;
   padding: 1rem 1.5rem;
   overflow-y: auto;
 `
