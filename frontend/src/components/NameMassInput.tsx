@@ -12,8 +12,30 @@ interface Props {
 
 const Row = styled.div`
   display: flex;
-  justify-content: space-around;
-  gap: 1rem;
+  input {
+    min-width: 0;
+    :focus {
+      z-index: 100;
+    }
+    :first-of-type {
+      border-radius: 2px 0 0 2px;
+      border-right-width: 0;
+      flex-grow: 999;
+      :focus {
+        border-right-width: 1px;
+      }
+    }
+    :last-of-type {
+      border-left-style: dashed;
+      border-radius: 0 2px 2px 0;
+      flex-grow: 1;
+      flex-basis: 4rem;
+      text-align: center;
+      :focus {
+        border-left-style: solid;
+      }
+    }
+  }
 `
 
 export const NameMassInput = ({ name, mass, onChange }: Props) => {
