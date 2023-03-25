@@ -65,10 +65,6 @@ export const NameMassFieldSet = ({
     <Fieldset>
       <Title>{label}</Title>
       <hr />
-      <Header>
-        <h3>Name</h3>
-        <h3>Mass</h3>
-      </Header>
       <InputRows rows={rows} onChange={updateRow} />
     </Fieldset>
   )
