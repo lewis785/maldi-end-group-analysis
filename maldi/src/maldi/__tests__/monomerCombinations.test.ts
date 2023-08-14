@@ -2,23 +2,10 @@ import { Monomer } from '../types'
 import { generateMonomerCombinations } from '../monomerCombinations'
 
 describe('#generateMonomerCombinations', () => {
-  const monomers: Monomer[] = [
-    { name: 'A', mass: 25 },
-    { name: 'B', mass: 50 },
-  ]
-
-  describe('multiple monomers', () => {
-    it('should throw error', () => {
-      expect(() => generateMonomerCombinations(100, monomers)).toThrowError(
-        new Error('More than one monomer is not support')
-      )
-    })
-  })
-
   describe('single monomer', () => {
     const monomer: Monomer = { name: 'A', mass: 25 }
 
-    it('should return empty array if repeat unit is negative', () => {
+    it('should return empty array if target is negative', () => {
       expect(generateMonomerCombinations(-100, [monomer])).toStrictEqual([])
     })
 
@@ -61,6 +48,42 @@ describe('#generateMonomerCombinations', () => {
           expectedResult
         )
       })
+    })
+  })
+
+  describe('multiple monomers', () => {
+    const monomers: Monomer[] = [
+      { name: 'A', mass: 20 },
+      { name: 'B', mass: 30 },
+    ]
+
+    it('should return 8 results', () => {
+      expect(generateMonomerCombinations(100, monomers).length).toBe(5)
+    })
+
+    it('should generate expected results', () => {
+      expect(generateMonomerCombinations(100, monomers)).toStrictEqual([
+        [
+          { ...monomers[0], count: 1 },
+          { ...monomers[1], count: 1 },
+        ],
+        [
+          { ...monomers[0], count: 1 },
+          { ...monomers[1], count: 2 },
+        ],
+        [
+          { ...monomers[0], count: 2 },
+          { ...monomers[1], count: 1 },
+        ],
+        [
+          { ...monomers[0], count: 2 },
+          { ...monomers[1], count: 2 },
+        ],
+        [
+          { ...monomers[0], count: 3 },
+          { ...monomers[1], count: 1 },
+        ],
+      ])
     })
   })
 })
