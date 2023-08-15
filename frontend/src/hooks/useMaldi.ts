@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react'
-import {
-  generateMaldiResults,
-  Input,
-  NameMass,
-  Result,
-} from 'maldi-end-group-analysis'
+import { generateMaldiResults, Input, Result } from 'maldi-end-group-analysis'
+import { parseInput } from '../utils/parseInput'
 
 export const useMaldi = (): [
   (input: Input, difference: number) => void,
@@ -23,17 +19,4 @@ export const useMaldi = (): [
   }
 
   return [generateResult, result]
-}
-
-const parseInput = (input: Input): Input => {
-  return {
-    peaks: removeEmptyValues(input.peaks),
-    monomers: removeEmptyValues(input.monomers),
-    endGroups: removeEmptyValues(input.endGroups),
-    cations: removeEmptyValues(input.cations),
-  }
-}
-
-const removeEmptyValues = (object: NameMass[]): NameMass[] => {
-  return object.filter((ele) => ele.name !== '' && ele.mass !== 0)
 }

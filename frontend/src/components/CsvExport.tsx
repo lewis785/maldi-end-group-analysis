@@ -1,9 +1,9 @@
 import { Input, Result } from 'maldi-end-group-analysis'
 import { Button } from './buttons/Button'
 import { csv } from 'maldi-end-group-analysis'
-import { CSVDownload, CSVLink } from 'react-csv'
+import { CSVLink } from 'react-csv'
 import { useRef } from 'react'
-import Link from 'react-csv/components/Link'
+import { parseInput } from '../utils/parseInput'
 
 interface Props {
   input: Input
@@ -27,7 +27,7 @@ export const CsvExport = ({ input, results }: Props) => {
       <CSVLink
         ref={ref}
         filename="maldi-end-group-analysis"
-        data={csv.exportToArray(input, results)}
+        data={csv.exportToArray(parseInput(input), results)}
         hidden
       >
         Export
