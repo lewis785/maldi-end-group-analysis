@@ -1,10 +1,10 @@
 import { Input, Result } from '../../../maldi/types'
-import { exporter } from '..'
+import { exportToFile } from '..'
 import fs from 'fs'
 
 jest.mock('fs')
 
-describe('#exporter', () => {
+describe('#exportToFile', () => {
   beforeEach(() => {
     jest.resetAllMocks()
   })
@@ -69,7 +69,7 @@ A,123,154,31,,2,0,,1,0,,1,0,1
 Peak B,543,357,186,,0,13,,0,1,,1,1,0`
 
   it('should write file with correct name and content', () => {
-    exporter('test', input, results)
+    exportToFile('test', input, results)
     expect(fs.writeFileSync).toBeCalledWith('test.csv', expectedContent)
   })
 
@@ -80,7 +80,7 @@ Peak B,543,357,186,,0,13,,0,1,,1,1,0`
       .mockReturnValueOnce(true)
       .mockReturnValueOnce(false)
 
-    exporter('test', input, results)
+    exportToFile('test', input, results)
     expect(fs.writeFileSync).toBeCalledWith('test(2).csv', expectedContent)
   })
 
@@ -91,7 +91,7 @@ Peak B,543,357,186,,0,13,,0,1,,1,1,0`
 Peak Name,Peak Mass,Actual Mass,Difference,,,,,,,,,,`
 
     it('should write file with correct name and content', () => {
-      exporter('test', input, [])
+      exportToFile('test', input, [])
       expect(fs.writeFileSync).toBeCalledWith('test.csv', expectedContent)
     })
   })

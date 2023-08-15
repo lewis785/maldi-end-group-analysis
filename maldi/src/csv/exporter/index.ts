@@ -4,16 +4,22 @@ import { generateResultRow } from './resultRow'
 import { writeFileSync, existsSync } from 'fs'
 import { ResultRow } from './type'
 
-export const exporter = (fileName: string, input: Input, results: Result[]) => {
+export const exportToFile = (
+  fileName: string,
+  input: Input,
+  results: Result[]
+) => {
+  writeToFile(fileName, exportToString(input, results))
+}
+
+export const exportToString = (input: Input, results: Result[]): string => {
   const resultRows = addEmptyLineBetweenPeakRows(
     results.map((result) => generateResultRow(result, input))
   )
 
   const output = [...generateHeader(input), ...resultRows]
 
-  const outputText = output.map((row) => row.join(',')).join('\n')
-
-  writeToFile(fileName, outputText)
+  return output.map((row) => row.join(',')).join('\n')
 }
 
 const writeToFile = (filename: string, content: string) => {

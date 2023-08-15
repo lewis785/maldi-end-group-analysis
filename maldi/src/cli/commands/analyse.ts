@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs'
 import { Options } from 'yargs'
-import { exporter } from '../../csv/exporter'
+import { exportToFile } from '../../csv/exporter'
 import { importer } from '../../csv/importer'
 import { generateMaldiResults } from '../../maldi'
 
