@@ -9,17 +9,21 @@ export const exportToFile = (
   input: Input,
   results: Result[]
 ) => {
-  writeToFile(fileName, exportToString(input, results))
+  const outputString = exportToArray(input, results)
+    .map((row) => row.join(','))
+    .join('\n')
+  writeToFile(fileName, outputString)
 }
 
-export const exportToString = (input: Input, results: Result[]): string => {
+export const exportToArray = (
+  input: Input,
+  results: Result[]
+): (string | number | undefined)[][] => {
   const resultRows = addEmptyLineBetweenPeakRows(
     results.map((result) => generateResultRow(result, input))
   )
 
-  const output = [...generateHeader(input), ...resultRows]
-
-  return output.map((row) => row.join(',')).join('\n')
+  return [...generateHeader(input), ...resultRows]
 }
 
 const writeToFile = (filename: string, content: string) => {
