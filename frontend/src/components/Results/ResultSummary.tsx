@@ -2,11 +2,18 @@ import { NameMass, Result } from 'maldi-end-group-analysis'
 import styled from 'styled-components'
 import { OpenToggle } from '../OpenToggle'
 
-const Summary = styled.summary`
+const Summary = styled.summary<{ monomerCount: number }>`
+  cursor: pointer;
   display: grid;
-  grid-template-columns: 1ch 0.5fr repeat(4, 1ch 1fr);
+  grid-template-columns: 1ch 0.5fr repeat(${(p) => 3 + p.monomerCount}, 1ch 1fr);
   column-gap: 1rem;
   align-items: center;
+`
+
+const Row = styled.summary`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `
 
 const Text = styled.p`
@@ -27,8 +34,17 @@ export const ResultSummary = ({ expanded, result }: Props) => {
 
   const difference = parseFloat((mass.target - mass.actual).toFixed(3))
 
+  const renderMonomers = () => {
+    return monomers.map(({ name, count }) => (
+      <>
+        <div />
+        <Text key={name}>{`${name} (${count})`}</Text>
+      </>
+    ))
+  }
+
   return (
-    <Summary>
+    <Summary monomerCount={result.monomers.length}>
       <OpenToggle isOpen={expanded} />
       <Text>
         {mass.actual} ({difference})
@@ -39,10 +55,7 @@ export const ResultSummary = ({ expanded, result }: Props) => {
       <Text>{name(endGroups[1])}</Text>
       <div />
       <Text>{cation.name}</Text>
-      <div />
-      <Text>
-        {monomers[0].name} ({monomers[0].count})
-      </Text>
+      {renderMonomers()}
     </Summary>
   )
 }

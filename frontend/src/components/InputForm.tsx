@@ -62,7 +62,6 @@ export const InputForm = ({
           rows={input.monomers}
           onChange={(rows) => onValueChange({ ...input, monomers: rows })}
           rowCount={1}
-          fixedRows
         />
         <NameMassFieldSet
           label="Cations"
