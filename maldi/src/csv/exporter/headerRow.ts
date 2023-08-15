@@ -60,7 +60,7 @@ const generateMassRow = (
 }
 
 const generateEmptyArray = (length: number) => {
-  return Array(length).fill('')
+  return Array(Math.max(length, 0)).fill('')
 }
 
 const getColumnCount = ({ monomers, cations, endGroups }: Input): number => {
