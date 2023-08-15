@@ -2740,10 +2740,10 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
-maldi-end-group-analysis@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.npmjs.org/maldi-end-group-analysis/-/maldi-end-group-analysis-0.2.1.tgz"
-  integrity sha512-MeQKCRoqnPfzV8+NZoRr5YCdIUteGSkp0HbpYfAn5gq5kFjmfAwAZfkEy3JjEqqPm0o2imYvl44n4rPZqMW5iw==
+maldi-end-group-analysis@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/maldi-end-group-analysis/-/maldi-end-group-analysis-0.3.0.tgz#d8eccdd7dada99b232bc6b32b678824cb738b86c"
+  integrity sha512-MwKdZ3mygTzfwY0acITDThyaRA368PWVdXY3KZ8/v16SUS4XA5jdc8h6Og1l1DV1FAmprhvUKO08ACQeNLStIg==
   dependencies:
     "@types/jest" "^27.4.0"
     "@typescript-eslint/eslint-plugin" "^5.0.0"
