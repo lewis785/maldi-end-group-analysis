@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react'
-import { generateMaldiResults, Input, Result } from 'maldi-end-group-analysis'
+import {
+  generateMaldiResults,
+  Input,
+  NameMass,
+  Result,
+} from 'maldi-end-group-analysis'
 
 export const useMaldi = (): [
   (input: Input, difference: number) => void,
@@ -14,8 +19,21 @@ export const useMaldi = (): [
   }, [result])
 
   const generateResult = (input: Input, difference: number) => {
-    setResult(generateMaldiResults(input, difference))
+    setResult(generateMaldiResults(parseInput(input), difference))
   }
 
   return [generateResult, result]
+}
+
+const parseInput = (input: Input): Input => {
+  return {
+    peaks: removeEmptyValues(input.peaks),
+    monomers: removeEmptyValues(input.monomers),
+    endGroups: removeEmptyValues(input.endGroups),
+    cations: removeEmptyValues(input.cations),
+  }
+}
+
+const removeEmptyValues = (object: NameMass[]): NameMass[] => {
+  return object.filter((ele) => ele.name !== '' && ele.mass !== 0)
 }
