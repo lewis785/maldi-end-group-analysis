@@ -1,6 +1,7 @@
 import { NameMass, Result } from 'maldi-end-group-analysis'
 import styled from 'styled-components'
 import { OpenToggle } from '../OpenToggle'
+import { Fragment } from 'react'
 
 const Summary = styled.summary<{ monomerCount: number }>`
   cursor: pointer;
@@ -8,12 +9,6 @@ const Summary = styled.summary<{ monomerCount: number }>`
   grid-template-columns: 1ch 0.5fr repeat(${(p) => 3 + p.monomerCount}, 1ch 1fr);
   column-gap: 1rem;
   align-items: center;
-`
-
-const Row = styled.summary`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 `
 
 const Text = styled.p`
@@ -36,10 +31,10 @@ export const ResultSummary = ({ expanded, result }: Props) => {
 
   const renderMonomers = () => {
     return monomers.map(({ name, count }) => (
-      <>
-        <div />
-        <Text key={name}>{`${name} (${count})`}</Text>
-      </>
+      <Fragment key={name}>
+        <div key={`div-${name}`} />
+        <Text key={`text-${name}`}>{`${name} (${count})`}</Text>
+      </Fragment>
     ))
   }
 

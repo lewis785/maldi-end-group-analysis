@@ -1,6 +1,7 @@
 import { Result } from 'maldi-end-group-analysis'
 import styled from 'styled-components'
 import { EqualIcon, MultiplyIcon, PlusIcon } from '../Icons'
+import { Fragment } from 'react'
 
 interface Props {
   result: Result
@@ -26,15 +27,15 @@ const Row = styled.div`
 
 export const Calculation = ({ result }: Props) => {
   const renderMonomers = () => {
-    return result.monomers.map(({ mass, count }) => (
-      <>
+    return result.monomers.map(({ name, mass, count }) => (
+      <Fragment key={name}>
         <PlusIcon />
         <GridItem>
           <span>
             ({mass} <MultiplyIcon /> {count})
           </span>
         </GridItem>
-      </>
+      </Fragment>
     ))
   }
 
