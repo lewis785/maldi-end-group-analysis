@@ -52,6 +52,7 @@ function App() {
       <Container>
         <InputForm
           input={input}
+          results={result}
           difference={difference}
           onValueChange={(value) => onInputChange(value)}
           onDifferenceChange={(newValue) => setDifference(newValue)}

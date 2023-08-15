@@ -1,8 +1,9 @@
 import styled from 'styled-components'
-import { Input } from 'maldi-end-group-analysis'
+import { Input, Result } from 'maldi-end-group-analysis'
 import { NameMassFieldSet } from './NameMassFieldSet'
 import { SliderInput } from './inputs/SliderInput'
 import { Button } from './buttons/Button'
+import { CsvExport } from './CsvExport'
 
 const InputSection = styled.section`
   display: flex;
@@ -35,6 +36,7 @@ const Actions = styled.div`
 
 interface Props {
   input: Input
+  results: Result[]
   difference: number
   onDifferenceChange: (newValue: number) => void
   onValueChange: (value: Input) => void
@@ -43,6 +45,7 @@ interface Props {
 
 export const InputForm = ({
   input,
+  results,
   difference,
   onDifferenceChange,
   onValueChange,
@@ -85,6 +88,7 @@ export const InputForm = ({
           onChange={onDifferenceChange}
         />
         <Button onClickHandler={onSubmit}>Generate</Button>
+        <CsvExport input={input} results={results} />
       </Actions>
     </InputSection>
   )
