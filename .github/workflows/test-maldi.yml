@@ -6,8 +6,12 @@ name: Test Maldi
 on:
   push:
     branches: [main]
+    paths:
+      - maldi/**
   pull_request:
     branches: [main]
+    paths:
+      - maldi/**
 
 jobs:
   build:
