@@ -1,6 +1,6 @@
 import { Column } from './enum'
 import { Input, NameMass } from './../maldi/types'
-import { validateHeader, validateRow } from './validator'
+import { validateRow } from './validator'
 import fs from 'fs'
 
 interface Row {
@@ -10,10 +10,13 @@ interface Row {
   cation: NameMass | undefined
 }
 
-export const importer = (path: string) => {
-  const [header, ...rows] = fs
-    .readFileSync(path)
-    .toString('utf-8')
+export const importFromFile = (path: string) => {
+  const inputString = fs.readFileSync(path).toString('utf-8')
+  return importFromString(inputString)
+}
+
+export const importFromString = (input: string) => {
+  const [_, ...rows] = input
     .replace(/\r\n/g, '\n')
     .split('\n')
     .map((line) => line.split(','))

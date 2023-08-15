@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs'
 import { Options } from 'yargs'
 import { exportToFile } from '../../csv/exporter'
-import { importer } from '../../csv/importer'
+import { importFromFile } from '../../csv/importer'
 import { generateMaldiResults } from '../../maldi'
 
 interface Arguments {
@@ -50,7 +50,7 @@ export const handler = (argv: Arguments) => {
   try {
     const maldiInput = parseMaldiInput(argv.file)
     const results = generateMaldiResults(maldiInput, argv.threshold)
-    exporter(argv.output, maldiInput, results)
+    exportToFile(argv.output, maldiInput, results)
 
     console.log(`Output - Total Results: ${results.length}`)
   } catch (e) {
@@ -63,7 +63,7 @@ const parseMaldiInput = (filePath: string) => {
 
   switch (fileExtension) {
     case 'csv':
-      return importer(filePath)
+      return importFromFile(filePath)
     case 'json':
       return parseInputJson(filePath)
     default:
