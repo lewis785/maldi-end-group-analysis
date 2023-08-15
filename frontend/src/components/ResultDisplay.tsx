@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 const ResultSection = styled.section`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   flex-grow: 999;
   flex-basis: 500px;
