@@ -44,11 +44,11 @@ export const NameMassInput = ({ name, mass, onChange }: Props) => {
   type InputEvent = React.ChangeEvent<HTMLInputElement>
 
   const onNameChange = ({ target }: InputEvent) => {
-    onChange({ name: target.value, mass: Number(mass) })
+    onChange({ name: target.value, mass })
   }
 
   const onMassChange = (value: string) => {
-    onChange({ name, mass: Number(Number(value).toFixed(decimalPlaces)) })
+    onChange({ name, mass: Number(value) })
   }
 
   return (
