@@ -6,6 +6,7 @@ const ResultSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   flex-grow: 999;
   flex-basis: 500px;
   padding: 1rem 1.5rem;
