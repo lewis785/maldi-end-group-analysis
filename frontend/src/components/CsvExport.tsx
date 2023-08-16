@@ -20,22 +20,26 @@ const isValidInput = (input: Input) => {
 }
 
 export const CsvExport = ({ input, results }: Props) => {
+  const [data, setData] = useState<(string | number | undefined)[][]>([])
   const ref = useRef<CSVLink & HTMLAnchorElement & { link: HTMLAnchorElement }>(
     null
   )
 
-  const parsedInput = parseInput(input)
-  const data = isValidInput(parsedInput)
-    ? csv.exportToArray(parsedInput, results)
-    : []
-
   const csvExport = () => {
+    const parsedInput = parseInput(input)
+    setData(
+      isValidInput(parsedInput) ? csv.exportToArray(parsedInput, results) : []
+    )
+
     ref.current?.link.click()
   }
 
   return (
     <>
-      <Button onClickHandler={csvExport} disabled={results.length === 0}>
+      <Button
+        onClickHandler={csvExport}
+        disabled={results.length === 0 || !isValidInput(parseInput(input))}
+      >
         Export
       </Button>
       <CSVLink ref={ref} filename="maldi-end-group-analysis" data={data} hidden>
