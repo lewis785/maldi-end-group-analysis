@@ -4,8 +4,10 @@ import styled from 'styled-components'
 
 const ResultSection = styled.section`
   display: flex;
+  box-sizing: border-box;
   flex-direction: column;
   align-items: center;
+  height: 100%;
   flex-grow: 999;
   flex-basis: 500px;
   padding: 1rem 1.5rem;

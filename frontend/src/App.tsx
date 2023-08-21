@@ -9,8 +9,7 @@ import { lightTheme } from './style/theme'
 const Container = styled.main`
   display: flex;
   flex-wrap: wrap;
-  min-height: 100vh;
-  max-height: 100vh;
+  height: 100dvh;
   color: ${({ theme }) => theme.primary.text};
 `
 
