@@ -3,9 +3,11 @@ import { Results } from './Results'
 import styled from 'styled-components'
 
 const ResultSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-auto-rows: auto;
+  row-gap: 2rem;
+  box-sizing: border-box;
+
   flex-grow: 999;
   flex-basis: 500px;
   padding: 1rem 1.5rem;

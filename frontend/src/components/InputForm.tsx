@@ -4,25 +4,26 @@ import { NameMassFieldSet } from './NameMassFieldSet'
 import { SliderInput } from './inputs/SliderInput'
 import { Button } from './buttons/Button'
 import { CsvExport } from './CsvExport'
+import { useEffect, useRef } from 'react'
 
 const InputSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  width: min(20rem, 100%);
-  flex-basis: 100px;
+  display: grid;
   flex-grow: 1;
+  flex-basis: 100px;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 100%;
+  height: 100%;
+  width: min(20rem, 100%);
   background: ${({ theme }) => theme.primary.white};
   border-right: 1px solid rgba(0, 0, 0, 0.3);
 `
 
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  max-width: 100%;
-  height: 100%;
+const Form = styled.section`
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: minmax(0, auto);
   overflow-y: auto;
   padding: 1rem 1rem;
-  justify-content: space-around;
 `
 
 const Actions = styled.div`
@@ -51,9 +52,15 @@ export const InputForm = ({
   onValueChange,
   onSubmit,
 }: Props) => {
+  const htmlRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    console.log(htmlRef.current?.scrollHeight)
+  })
+
   return (
     <InputSection>
-      <Form>
+      <Form ref={htmlRef}>
         <NameMassFieldSet
           label="Peaks"
           rows={input.peaks}

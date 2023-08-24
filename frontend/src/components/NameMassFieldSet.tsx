@@ -11,11 +11,6 @@ interface Props {
   fixedRows?: boolean
 }
 
-const Header = styled.header`
-  display: flex;
-  justify-content: space-around;
-`
-
 const Fieldset = styled.article`
   display: flex;
   flex-direction: column;
@@ -26,12 +21,6 @@ const Title = styled.h1`
   font-size: 1.5rem;
   width: 100%;
   text-align: center;
-`
-
-const Inputs = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
 `
 
 export const NameMassFieldSet = ({
