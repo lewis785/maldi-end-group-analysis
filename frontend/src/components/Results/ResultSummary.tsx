@@ -4,7 +4,6 @@ import { OpenToggle } from '../OpenToggle'
 import { Fragment } from 'react'
 
 const Summary = styled.summary<{ monomerCount: number }>`
-  cursor: pointer;
   display: grid;
   grid-template-columns: 1ch 0.5fr repeat(${(p) => 3 + p.monomerCount}, 1ch 1fr);
   column-gap: 1rem;

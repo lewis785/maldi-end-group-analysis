@@ -4,26 +4,31 @@ import theme from ''
 
 type CustomTheme = typeof lightTheme
 
+interface Colors {
+  background: {
+    primary: string
+    secondary: string
+  }
+  text: string
+  button: { background: string; hover: string; text: string }
+  table: { background: string; hover: string }
+}
+
 declare module 'styled-components' {
   export interface DefaultTheme {
+    spacing: {
+      sm: string
+      rg: string
+      lg: string
+    }
     font: {
       size: {
         sm: string
         rg: string
         lg: string
       }
+      family: string
     }
-    primary: {
-      text: string
-      background: string
-      action: string
-      white: string
-    }
-    secondary: {
-      text: string
-      background: string
-      action: string
-      white: string
-    }
+    colors: Colors
   }
 }

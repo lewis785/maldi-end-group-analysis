@@ -10,12 +10,13 @@ const StyledButton = styled.button`
   padding: 0.5rem 2rem;
   border: 0;
   border-radius: 8px;
-  background: ${({ theme }) => theme.primary.action};
-  font-size: 1rem;
+  background: ${({ theme }) => theme.colors.button.background};
+  color: ${({ theme }) => theme.colors.button.text};
+  font-size: ${({ theme }) => theme.font.size.rg};
 
   &:hover {
     cursor: pointer;
-    background: #0085a2;
+    background: ${({ theme }) => theme.colors.button.hover};
   }
 
   &:disabled {

@@ -19,8 +19,7 @@ const ResultList = styled.ol`
   display: flex;
   flex-direction: column;
   list-style: none;
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  border-bottom: 0;
+  gap: ${({ theme }) => theme.spacing.sm};
 `
 
 export const Results = ({ results }: Props) => {

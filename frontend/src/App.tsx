@@ -10,7 +10,7 @@ const Container = styled.main`
   display: flex;
   flex-wrap: wrap;
   height: 100dvh;
-  color: ${({ theme }) => theme.primary.text};
+  color: ${({ theme }) => theme.colors.text};
 `
 
 const initialState: Input = {

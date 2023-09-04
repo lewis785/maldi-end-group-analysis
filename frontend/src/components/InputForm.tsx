@@ -14,7 +14,7 @@ const InputSection = styled.section`
   grid-template-columns: 100%;
   height: 100%;
   width: min(20rem, 100%);
-  background: ${({ theme }) => theme.primary.white};
+  background: ${({ theme }) => theme.colors.background.secondary};
   border-right: 1px solid rgba(0, 0, 0, 0.3);
 `
 

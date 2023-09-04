@@ -7,11 +7,11 @@ const ResultSection = styled.section`
   grid-auto-rows: auto;
   row-gap: 2rem;
   box-sizing: border-box;
-
   flex-grow: 999;
   flex-basis: 500px;
   padding: 1rem 1.5rem;
   overflow-y: auto;
+  background: ${({ theme }) => theme.colors.background.primary};
 `
 
 interface Props {
