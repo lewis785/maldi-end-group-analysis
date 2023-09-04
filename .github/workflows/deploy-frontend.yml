@@ -11,6 +11,8 @@ on:
   workflow_run:
     workflows: [Test Frontend]
     branches: [main]
+    types:
+      - completed
 
 jobs:
   deploy:
