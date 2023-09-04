@@ -12,6 +12,10 @@ const ResultSection = styled.section`
   padding: 1rem 1.5rem;
   overflow-y: auto;
   background: ${({ theme }) => theme.colors.background.primary};
+
+  @media (min-width: 51rem) {
+    height: 100%;
+  }
 `
 
 interface Props {
