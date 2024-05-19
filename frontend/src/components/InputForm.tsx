@@ -54,10 +54,6 @@ export const InputForm = ({
 }: Props) => {
   const htmlRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    console.log(htmlRef.current?.scrollHeight)
-  })
-
   return (
     <InputSection>
       <Form ref={htmlRef}>
