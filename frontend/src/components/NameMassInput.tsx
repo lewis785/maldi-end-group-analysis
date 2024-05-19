@@ -12,13 +12,15 @@ interface Props {
 
 const Row = styled.div`
   display: flex;
+  border-radius: 5px;
   input {
     min-width: 0;
     :focus {
       z-index: 100;
     }
     :first-of-type {
-      border-radius: 2px 0 0 2px;
+      /* padding: 1rem 0 1rem 1rem; */
+      border-radius: 5px 0 0 5px;
       border-right-width: 0;
       flex-grow: 999;
       :focus {
@@ -27,7 +29,7 @@ const Row = styled.div`
     }
     :last-of-type {
       border-left-style: dashed;
-      border-radius: 0 2px 2px 0;
+      border-radius: 0 5px 5px 0;
       flex-grow: 1;
       flex-basis: 4rem;
       text-align: center;
